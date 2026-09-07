@@ -1,0 +1,132 @@
+/* Paged.js + Chromium print styles. Fonts are inlined by build_book.py. */
+@font-face { font-family: Amiri; src: url("Amiri-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: Amiri; src: url("Amiri-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: FiraMono; src: url("FiraMono-Regular.ttf"); font-weight: 400; }
+@page {
+  size: A4;
+  margin: 19mm 17mm 20mm;
+  @top-right {
+    content: "كيف يعمل لينكس  ·  إعداد عربي تعليمي  ·  الدفعة الأولى";
+    font-family: Amiri; font-size: 10pt; color: #61777c;
+    direction: rtl; text-align: right;
+    border-bottom: 0.5pt solid #d0ddda; padding-bottom: 5pt;
+  }
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font-family: FiraMono; font-size: 8pt; color: #61777c;
+    direction: ltr; text-align: center;
+    border-top: 0.5pt solid #d0ddda; padding-top: 6pt;
+  }
+}
+@page cover {
+  size: A4; margin: 0;
+  @top-right { content: none; border: none; }
+  @bottom-center { content: none; border: none; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Amiri, serif; font-size: 14pt; font-weight: 400;
+  line-height: 1.65; color: #25343b;
+  text-align: right; direction: rtl;
+  font-synthesis: none;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+p { margin: 0 0 9pt; widows: 3; orphans: 3; }
+h1, h2, h3, h4 {
+  font-family: Amiri, serif; font-weight: 700;
+  text-align: right; color: #155c63;
+  break-after: avoid; page-break-after: avoid;
+}
+h1 { font-size: 29pt; line-height: 1.35; margin: 0 0 19pt; }
+h2 { font-size: 21pt; line-height: 1.4; margin: 20pt 0 9pt; }
+h3 { font-size: 17pt; line-height: 1.4; margin: 15pt 0 7pt; }
+h4 { font-size: 15pt; margin: 12pt 0 6pt; }
+strong, b { font-weight: 700; }
+em { font-style: normal; color: #40565f; }
+a { color: #156c75; text-decoration: none; }
+a[href^="https://"] { text-decoration: underline; text-underline-offset: 2pt; }
+ul, ol { margin: 5pt 0 12pt; padding-right: 24pt; padding-left: 0; }
+li { margin: 0 0 5pt; text-align: right; widows: 2; orphans: 2; }
+li::marker { color: #33797c; }
+blockquote {
+  background-color: #eef5f3; border-right: 3pt solid #397c7e;
+  padding: 10pt 13pt; margin: 13pt 0;
+  font-size: 12.5pt; line-height: 1.6;
+  break-inside: avoid;
+}
+blockquote p { margin: 0; }
+code, kbd, samp {
+  font-family: FiraMono, monospace; font-size: 9.5pt; font-weight: 400;
+  direction: ltr; unicode-bidi: isolate;
+}
+:not(pre) > code { display: inline-block; white-space: nowrap; }
+pre {
+  font-family: FiraMono, monospace; font-size: 9.5pt; line-height: 1.7;
+  text-align: left; direction: ltr; unicode-bidi: isolate;
+  background-color: #f0f3f5; border-left: 3pt solid #95a9b2;
+  padding: 11pt 12pt; margin: 10pt 0 13pt;
+  white-space: pre; break-inside: avoid;
+}
+pre code { font-size: 9.5pt; line-height: inherit; background: none; }
+table {
+  width: 100%; border-collapse: collapse; direction: rtl;
+  margin: 10pt 0 14pt; font-size: 12pt; line-height: 1.5;
+}
+thead { display: table-header-group; }
+th, td {
+  text-align: right; vertical-align: top;
+  border: 0.5pt solid #cad8d9; padding: 6pt 8pt;
+}
+th { background-color: #e5efed; color: #155c63; font-weight: 700; }
+tr { break-inside: avoid; }
+.chapter { break-before: page; }
+.diagram {
+  margin: 14pt 0 17pt; padding: 12pt;
+  border: 0.7pt solid #cad8d9; break-inside: avoid;
+}
+.layer { padding: 9pt; text-align: center; font-size: 12.5pt; line-height: 1.5; }
+.layer strong { color: #155c63; }
+.layer-user { background-color: #e3f0ed; }
+.layer-kernel { background-color: #d6e8e8; }
+.layer-hardware { background-color: #f1eee6; }
+.layer-service { background-color: #ebf0f1; }
+.connector { text-align: center; font-size: 10.5pt; color: #64787d; padding: 5pt; }
+figcaption { font-size: 10.5pt; color: #536970; line-height: 1.5; margin-top: 9pt; }
+.process-diagram { margin: 0; font-size: 11.5pt; }
+.glossary { font-size: 12.5pt; line-height: 1.55; }
+.glossary table { font-size: 11.5pt; table-layout: fixed; }
+.editorial-notes { font-size: 12.5pt; line-height: 1.6; }
+.glossary th:nth-child(1) { width: 25%; }
+.glossary th:nth-child(2) { width: 27%; }
+.glossary th, .glossary td { padding: 5pt 7pt; }
+.glossary td:first-child { font-size: 10.5pt; direction: ltr; text-align: left; }
+.cover {
+  page: cover; height: 297mm; padding: 25mm 20mm 18mm;
+  background: #f8f5ee; border-right: 7mm solid #164e56;
+  position: relative;
+}
+.cover-kicker { font-size: 15pt; color: #7c6040; margin-bottom: 27pt; }
+.cover-title { font-size: 62pt; line-height: 1.13; color: #164e56; font-weight: 700; margin: 0 0 26pt; }
+.cover-subtitle { font-size: 24pt; line-height: 1.5; color: #345c63; margin-bottom: 28pt; }
+.cover-credit { font-size: 14pt; color: #465a60; margin: 0 0 6pt; }
+.cover-author { font-size: 20pt; font-weight: 700; margin-bottom: 8pt; }
+.cover-original { font-size: 12pt; line-height: 1.5; text-align: right; margin-bottom: 25pt; }
+.cover-scope { background-color: #e4ece7; border-right: 3pt solid #b58a50; padding: 12pt 15pt; margin: 0 0 23pt; font-size: 13pt; }
+.cover-date { color: #796954; font-size: 12pt; margin-top: 22pt; }
+.contents { break-before: page; }
+.toc-table { font-size: 13pt; margin-top: 18pt; }
+.toc-table td { border: none; border-bottom: 0.4pt solid #dbe3e1; padding: 5pt 0; }
+.toc-table .toc-sub { padding-right: 18pt; font-size: 12pt; }
+.toc-table .toc-number { width: 32pt; font-family: FiraMono; font-size: 9pt; text-align: left; }
+.contents-note { font-size: 12pt; color: #5d6e73; margin-top: 22pt; }
+.roadmap table { font-size: 11.5pt; }
+.roadmap td:first-child { width: 8%; }
+.roadmap td:last-child { width: 23%; }
+/* Paged.js supplies the physical page boxes; do not add screen-only gutters. */
+.pagedjs_pages { display: block; }
+/* Its overflow detector advances columns to the right. Keep only that
+   mechanical container LTR; every actual chapter and text block stays RTL. */
+.pagedjs_page { margin: 0 !important; box-shadow: none !important; direction: ltr; }
+.pagedjs_page_content { direction: ltr; }
+.chapter, .contents, .cover { direction: rtl; }

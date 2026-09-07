@@ -1,0 +1,11 @@
+# Local environments, caches, and intermediate renderings
+.venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.cache/
+.pytest_cache/
+.ruff_cache/
+build/
+.DS_Store
+# The requested PDF and combined Markdown in editions/ are intentional deliverables.

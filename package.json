@@ -1,0 +1,20 @@
+{
+  "name": "how-linux-works-ar-book",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An explicitly partial, beginner-friendly Arabic adaptation with a reproducible RTL PDF build",
+  "type": "module",
+  "engines": {
+    "node": ">=22.17.0"
+  },
+  "scripts": {
+    "build": "python3 scripts/build_book.py",
+    "check": "python3 scripts/build_book.py --check --verify-source",
+    "test": "python3 -m unittest discover -s tests -v"
+  },
+  "dependencies": {
+    "@sparticuz/chromium": "149.0.0",
+    "pagedjs": "0.4.3",
+    "playwright-core": "1.63.0"
+  }
+}

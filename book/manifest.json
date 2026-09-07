@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "edition": {
+    "slug": "how-linux-works-ar-part-01",
+    "title": "كيف يعمل لينكس",
+    "subtitle": "إعداد عربي تعليمي للمبتدئين",
+    "label": "الدفعة الأولى",
+    "date": "2026-09-07",
+    "date_ar": "7 سبتمبر 2026",
+    "status": "partial-draft",
+    "scope_note": "مقدمة وفصل أول، مع معجم وتمارين وإجابات. ليست نسخة كاملة من الكتاب؛ الفصول من الثاني إلى السابع عشر لم تُعد بعد."
+  },
+  "source": {
+    "file": "HowLinuxWorks.pdf",
+    "title": "How Linux Works: What Every Superuser Should Know",
+    "author": "Brian Ward",
+    "publisher": "No Starch Press",
+    "edition": 2,
+    "pdf_pages": 338,
+    "sha256": "de56a39307fe5d8d9b5283d884ee8418241b283556fbf5ae9b13dc2360d065fa",
+    "page_numbering": "1-based physical PDF pages, verified against the text, not the PDF bookmarks. Chapter 12 ends and chapter 13 begins on page 241."
+  },
+  "documents": [
+    {
+      "id": "preface",
+      "title": "مقدمة الطبعة العربية التعليمية",
+      "file": "book/ar/00-preface.md",
+      "kind": "adaptation",
+      "source_pages": [
+        4,
+        6
+      ]
+    },
+    {
+      "id": "chapter-1",
+      "title": "الفصل الأول: الصورة العامة",
+      "file": "book/ar/01-the-big-picture.md",
+      "kind": "adaptation",
+      "source_pages": [
+        8,
+        14
+      ]
+    },
+    {
+      "id": "glossary",
+      "title": "معجم الدفعة الأولى",
+      "file": "book/ar/glossary.md",
+      "kind": "editorial"
+    },
+    {
+      "id": "editorial-notes",
+      "title": "ملاحظات الإعداد والمراجع",
+      "file": "book/ar/references.md",
+      "kind": "editorial"
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title_ar": "الصورة العامة",
+      "title_en": "The Big Picture",
+      "source_pages": [
+        8,
+        14
+      ],
+      "status": "draft",
+      "document_id": "chapter-1"
+    },
+    {
+      "number": 2,
+      "title_ar": "الأوامر الأساسية وبنية الأدلة",
+      "title_en": "Basic Commands and Directory Hierarchy",
+      "source_pages": [
+        15,
+        41
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 3,
+      "title_ar": "الأجهزة",
+      "title_en": "Devices",
+      "source_pages": [
+        42,
+        58
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 4,
+      "title_ar": "الأقراص وأنظمة الملفات",
+      "title_en": "Disks and Filesystems",
+      "source_pages": [
+        59,
+        80
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 5,
+      "title_ar": "كيف تُقلع نواة لينكس",
+      "title_en": "How the Linux Kernel Boots",
+      "source_pages": [
+        81,
+        94
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 6,
+      "title_ar": "كيف يبدأ فضاء المستخدم",
+      "title_en": "How User Space Starts",
+      "source_pages": [
+        95,
+        124
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 7,
+      "title_ar": "إعداد النظام: السجلات والوقت والمهام الدفعية والمستخدمون",
+      "title_en": "System Configuration: Logging, System Time, Batch Jobs, and Users",
+      "source_pages": [
+        125,
+        142
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 8,
+      "title_ar": "نظرة أعمق إلى العمليات واستخدام الموارد",
+      "title_en": "A Closer Look at Processes and Resource Utilization",
+      "source_pages": [
+        143,
+        158
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 9,
+      "title_ar": "فهم الشبكة وإعدادها",
+      "title_en": "Understanding Your Network and Its Configuration",
+      "source_pages": [
+        159,
+        191
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 10,
+      "title_ar": "تطبيقات الشبكة وخدماتها",
+      "title_en": "Network Applications and Services",
+      "source_pages": [
+        192,
+        209
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 11,
+      "title_ar": "مقدمة إلى سكربتات الصدفة",
+      "title_en": "Introduction to Shell Scripts",
+      "source_pages": [
+        210,
+        228
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 12,
+      "title_ar": "نقل الملفات عبر الشبكة",
+      "title_en": "Moving Files Across the Network",
+      "source_pages": [
+        229,
+        241
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 13,
+      "title_ar": "بيئات المستخدمين",
+      "title_en": "User Environments",
+      "source_pages": [
+        241,
+        249
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 14,
+      "title_ar": "جولة موجزة في سطح مكتب لينكس",
+      "title_en": "A Brief Survey of the Linux Desktop",
+      "source_pages": [
+        250,
+        259
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 15,
+      "title_ar": "أدوات التطوير",
+      "title_en": "Development Tools",
+      "source_pages": [
+        260,
+        275
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 16,
+      "title_ar": "مقدمة إلى بناء البرامج من شيفرة C المصدرية",
+      "title_en": "Introduction to Compiling Software From C Source Code",
+      "source_pages": [
+        276,
+        287
+      ],
+      "status": "pending"
+    },
+    {
+      "number": 17,
+      "title_ar": "البناء على الأساسيات",
+      "title_en": "Building on the Basics",
+      "source_pages": [
+        288,
+        291
+      ],
+      "status": "pending"
+    }
+  ],
+  "other_source_material": [
+    {
+      "title_ar": "عبارات الثناء",
+      "source_pages": [
+        3,
+        3
+      ],
+      "status": "pending"
+    },
+    {
+      "title_ar": "شكر المؤلف",
+      "source_pages": [
+        7,
+        7
+      ],
+      "status": "pending"
+    },
+    {
+      "title_ar": "قائمة مراجع الأصل",
+      "source_pages": [
+        292,
+        293
+      ],
+      "status": "pending"
+    },
+    {
+      "title_ar": "فهرس الأصل",
+      "source_pages": [
+        294,
+        335
+      ],
+      "status": "pending"
+    },
+    {
+      "title_ar": "نبذة عن المؤلف",
+      "source_pages": [
+        336,
+        336
+      ],
+      "status": "pending"
+    },
+    {
+      "title_ar": "صفحة الحقوق الأصلية",
+      "source_pages": [
+        337,
+        337
+      ],
+      "status": "pending"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# Keep upstream font licenses verbatim, including their original whitespace.
+# Restrict the whitespace-check exception to these vendor files.
+book/assets/fonts/Amiri-OFL.txt -text -whitespace
+book/assets/fonts/FiraMono-OFL.txt -text -whitespace

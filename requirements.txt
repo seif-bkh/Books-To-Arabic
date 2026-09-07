@@ -1,0 +1,4 @@
+# Python 3.10+. Markdown preparation and PDF metadata/validation.
+# Chromium and Paged.js typeset the PDF; install Node dependencies with npm ci.
+Markdown==3.10.3
+PyMuPDF==1.28.2
