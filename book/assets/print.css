@@ -6,7 +6,7 @@
   size: A4;
   margin: 19mm 17mm 20mm;
   @top-right {
-    content: "كيف يعمل لينكس  ·  إعداد عربي تعليمي  ·  الدفعة الأولى";
+    content: "__BOOK_RUNNING_HEADER__";
     font-family: Amiri; font-size: 10pt; color: #61777c;
     direction: rtl; text-align: right;
     border-bottom: 0.5pt solid #d0ddda; padding-bottom: 5pt;
@@ -33,6 +33,8 @@ body {
   -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
 p { margin: 0 0 9pt; widows: 3; orphans: 3; }
+/* Keep an example's introduction or table label with the block it describes. */
+p:has(+ pre), p:has(+ table), p:has(+ figure) { break-after: avoid; page-break-after: avoid; }
 h1, h2, h3, h4 {
   font-family: Amiri, serif; font-weight: 700;
   text-align: right; color: #155c63;

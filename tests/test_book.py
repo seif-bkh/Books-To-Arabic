@@ -49,10 +49,11 @@ class SourceTests(unittest.TestCase):
     def test_explicit_partial_scope(self):
         self.assertEqual(self.manifest["edition"]["status"], "partial-draft")
         self.assertEqual([c["number"] for c in self.manifest["chapters"]], list(range(1, 18)))
-        self.assertEqual([c["number"] for c in self.manifest["chapters"] if c["status"] == "draft"], [1])
-        self.assertTrue(all(c["status"] == "pending" for c in self.manifest["chapters"][1:]))
+        self.assertEqual([c["number"] for c in self.manifest["chapters"] if c["status"] == "draft"], [1, 2])
+        self.assertTrue(all(c["status"] == "pending" for c in self.manifest["chapters"][2:]))
         self.assertIn("ليست نسخة كاملة", self.manifest["edition"]["scope_note"])
-        self.assertIn("الفصول من الثاني إلى السابع عشر لم تُعد بعد", book.cover_html(self.manifest))
+        self.assertEqual(self.manifest["edition"]["slug"], "how-linux-works-ar-part-02")
+        self.assertIn("الفصول من الثالث إلى السابع عشر لم تُعد بعد", book.cover_html(self.manifest))
 
     def test_all_original_chapter_one_sections(self):
         chapter = next(d["markdown"] for d in self.documents if d["id"] == "chapter-1")
@@ -66,7 +67,7 @@ class SourceTests(unittest.TestCase):
         for number in range(1, 4):
             self.assertIn(f'<figcaption>الشكل <span dir="ltr">1-{number}</span>', chapter)
         self.assertIn("إجابات مقترحة", chapter)
-        self.assertIn("الفصل الثاني غير متاح", chapter)
+        self.assertIn("الفصل الثاني متاح الآن", chapter)
 
     def test_valid_internal_links_and_explicit_code_direction(self):
         book.check_html(self.markup)
@@ -108,7 +109,8 @@ class SourceTests(unittest.TestCase):
             root = Path(directory)
             shutil.copytree(ROOT / "book/ar", root / "book/ar")
             data = copy.deepcopy(self.manifest)
-            data["chapters"][1]["status"] = "draft"
+            shutil.copytree(ROOT / "book/coverage", root / "book/coverage")
+            data["chapters"][2]["status"] = "draft"
             (root / "book/manifest.json").write_text(json.dumps(data, ensure_ascii=False))
             with self.assertRaisesRegex(ValueError, "real source document"):
                 book.load_manifest(root)
@@ -125,7 +127,7 @@ class SourceTests(unittest.TestCase):
     def test_reviewed_safe_examples_run(self):
         examples = {
             code.strip()
-            for d in self.documents
+            for d in self.documents if d["id"] in {"preface", "chapter-1"}
             for language, code in book.FENCED_CODE.findall(d["markdown"])
             if language == "sh"
         }
@@ -162,23 +164,27 @@ class PDFTests(unittest.TestCase):
         cls.scratch.cleanup()
 
     def test_full_pagination_not_just_first_page_of_each_chapter(self):
-        self.assertGreater(len(self.pdf), 20)
-        self.assertLess(len(self.pdf), 60)
-        self.assertGreater(len(self.text), 40_000)
-        self.assertGreaterEqual(self.result["verified_blocks"], 300)
+        self.assertGreater(len(self.pdf), 65)
+        self.assertLess(len(self.pdf), 150)
+        self.assertGreater(len(self.text), 110_000)
+        self.assertGreaterEqual(self.result["verified_blocks"], 700)
+        chapter_two_pages = self.result["heading_pages"]["glossary"] - self.result["heading_pages"]["chapter-2"]
+        self.assertGreater(chapter_two_pages, 35)
         for page in self.pdf:
             self.assertAlmostEqual(page.rect.width, 595.28, delta=1)
             self.assertAlmostEqual(page.rect.height, 841.89, delta=1)
             self.assertGreater(len(page.get_text().strip()), 100)
 
     def test_arabic_is_searchable_not_garbled_glyph_codes(self):
-        for word in ("النواة", "الذاكرة", "التجريد", "الصلاحيات"):
+        for word in ("النواة", "الذاكرة", "التجريد", "الصلاحيات", "الصدفة", "الأرشيف"):
             self.assertTrue(any(page.search_for(word) for page in self.pdf), word)
         # Regression guard for a renderer producing correct-looking glyphs but
         # mapping Arabic letters to Hebrew/Indic characters in its ToUnicode map.
         self.assertNotRegex(self.text, "[\u0590-\u05ff\u0900-\u0fff]")
         self.assertEqual(self.pdf.xref_get_key(self.pdf.pdf_catalog(), "Lang"), ("string", "ar"))
         self.assertIn("جزئي", self.pdf.metadata["title"])
+        self.assertIn("الدفعة الثانية", self.pdf.metadata["title"])
+        self.assertIn("Chapter 2", self.pdf.metadata["keywords"])
 
     def test_commands_and_example_output_remain_copyable(self):
         for document in self.documents:
@@ -197,7 +203,10 @@ class PDFTests(unittest.TestCase):
         self.assertEqual(toc[0], [1, "محتويات هذه الدفعة", 2])
 
     def test_contents_links_and_external_references_survive(self):
-        contents_links = self.pdf[1].get_links()
+        start = self.result["heading_pages"]["contents"] - 1
+        end = self.result["heading_pages"]["preface"] - 1
+        self.assertGreater(end - start, 1, "The expanded contents should span multiple pages")
+        contents_links = [link for page in self.pdf.pages(start, end) for link in page.get_links()]
         for target in book.toc_entries(self.documents):
             page_number = self.result["heading_pages"][target["id"]] - 1
             self.assertTrue(any(link.get("page") == page_number for link in contents_links), target)

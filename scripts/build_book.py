@@ -32,11 +32,58 @@ BIDI_CONTROLS = re.compile("[\u200e\u200f\u202a-\u202e\u2066-\u2069]")
 FENCED_CODE = re.compile(r"^```([^\n]*)\n(.*?)^```\s*$", re.M | re.S)
 
 
+def validate_coverage(document: dict[str, Any], text: str, root: Path) -> None:
+    """Match a drafted chapter against its reviewed, source-derived checklist."""
+    if "coverage_file" not in document:
+        return
+    path = (root / document["coverage_file"]).resolve()
+    if not path.is_relative_to(root.resolve()) or not path.is_file():
+        raise ValueError("Missing or out-of-repository chapter coverage file")
+    coverage = json.loads(path.read_text(encoding="utf-8"))
+    number = coverage["chapter"]
+    found = re.findall(rf"^#{{2,3}} ({number}(?:\.\d+)+)\s+([^\n]+)$", text, re.M)
+    expected = [(item["number"], item["title_ar"]) for item in coverage["sections"]]
+    if found != expected:
+        raise ValueError(f"Missing, reordered, or mismatched sections in {document['file']}")
+    if coverage["source_pages"] != document["source_pages"]:
+        raise ValueError("Chapter coverage and document page ranges disagree")
+    for item in coverage["sections"]:
+        if not coverage["source_pages"][0] <= item["source_page"] <= coverage["source_pages"][1]:
+            raise ValueError("Section source page is outside the chapter range")
+        body = re.search(
+            rf"^#{{2,3}} {re.escape(item['number'])} [^\n]+\n(.*?)(?=^#{{1,6}} |\Z)",
+            text, re.M | re.S,
+        )
+        if not body or len(re.findall(r"[\u0600-\u06ff]", body[1])) < 20:
+            raise ValueError(f"Section has no substantive Arabic explanation: {item['number']}")
+    figures = re.findall(r'<figure[^>]+id="figure-([^"]+)"', text)
+    if figures != coverage["figures"]:
+        raise ValueError("Chapter figure coverage does not match")
+    for label in coverage["tables"]:
+        if f'الجدول <span dir="ltr">{label}</span>' not in text:
+            raise ValueError(f"Missing original numbered table: {label}")
+    if re.findall(r"<!-- lab: ([a-z0-9-]+) -->", text) != coverage["labs"]:
+        raise ValueError("Chapter lab checklist does not match")
+
+
+def verify_archives(data: dict[str, Any], root: Path = ROOT) -> None:
+    """A new cumulative edition must not replace a previous review artifact."""
+    for edition in data.get("archived_editions", []):
+        for artifact in edition["files"]:
+            path = (root / artifact["file"]).resolve()
+            if not path.is_relative_to(root.resolve()) or not path.is_file():
+                raise ValueError("Missing or out-of-repository archived artifact")
+            if hashlib.sha256(path.read_bytes()).hexdigest() != artifact["sha256"]:
+                raise ValueError(f"Archived review artifact was changed: {artifact['file']}")
+
+
 def load_manifest(root: Path = ROOT) -> dict[str, Any]:
     data = json.loads((root / "book/manifest.json").read_text(encoding="utf-8"))
     if data.get("schema_version") != 1:
         raise ValueError("Unsupported manifest schema_version")
     chapters = data["chapters"]
+    if data["edition"]["slug"] in {e["slug"] for e in data.get("archived_editions", [])}:
+        raise ValueError("The active edition cannot overwrite an archived review edition")
     if [ch["number"] for ch in chapters] != list(range(1, 18)):
         raise ValueError("The roadmap must account for all 17 original chapters")
     ids = [item["id"] for item in data["documents"]]
@@ -56,6 +103,7 @@ def load_manifest(root: Path = ROOT) -> dict[str, Any]:
             raise ValueError(f"Title does not match manifest: {item['file']}")
         if len(re.findall(r"[\u0600-\u06ff]", text)) < 500:
             raise ValueError(f"Document lacks substantive Arabic content: {item['file']}")
+        validate_coverage(item, text, root)
         if text.count("```") % 2:
             raise ValueError(f"Unclosed code fence: {item['file']}")
         for language, code in FENCED_CODE.findall(text):
@@ -174,7 +222,7 @@ def roadmap_markdown(data: dict[str, Any]) -> str:
     rows = [
         "# خريطة إنجاز الكتاب",
         "",
-        f"**المتاح: مسودة {available} من أصل 17 فصلًا، إضافة إلى المقدمة العربية.** "
+        f"**عدد الفصول ذات المسودات: {available} من أصل 17، إضافة إلى المقدمة العربية.** "
         "هذه أعداد فصول، وليست نسبة مئوية من كلمات الكتاب أو صفحاته. "
         "«مسودة متاحة» تعني وجود نص قابل للقراءة والمراجعة، لا اعتماد ترجمة نهائية.",
         "",
@@ -187,6 +235,9 @@ def roadmap_markdown(data: dict[str, Any]) -> str:
             f'| {chapter["number"]} | {chapter["title_ar"]} | <span dir="ltr">{start}–{end}</span> | '
             f"{STATUS_AR[chapter['status']]} |"
         )
+    pending = [ch for ch in data["chapters"] if ch["status"] == "pending"]
+    next_step = (f"ثم إعداد الفصل {pending[0]['number']}: {pending[0]['title_ar']}. "
+                 if pending else "لا توجد فصول مرقمة متبقية؛ راجع المواد الأخرى وحالة المراجعة. ")
     rows.extend([
         "",
         "تبدأ بعض الفصول في الصفحة نفسها التي ينتهي فيها الفصل السابق؛ "
@@ -196,8 +247,8 @@ def roadmap_markdown(data: dict[str, Any]) -> str:
         + "، ".join(item["title_ar"] for item in data["other_source_material"]
                     if item["status"] == "pending") + ".",
         "",
-        "**الخطوة التالية:** إعداد الفصل الثاني، مع مراجعة أمثلته على توزيعة معاصرة، "
-        "والحفاظ على فصل التوضيحات المضافة عن مادة الأصل. لا يحتوي هذا الإصدار على "
+        "**الخطوة التالية بعد المراجعة:** انتظار ملاحظات المستخدم على الدفعة الحالية؛ "
+        + next_step + "لا يحتوي هذا الإصدار على "
         "صفحات فارغة أو ملخصات بديلة تدّعي أنها الفصول المتبقية.",
         "",
     ])
@@ -206,15 +257,16 @@ def roadmap_markdown(data: dict[str, Any]) -> str:
 
 def cover_html(data: dict[str, Any]) -> str:
     edition = data["edition"]
+    subtitle = "<br />".join(html.escape(line) for line in edition["cover_lines"])
     return f'''<div class="cover" dir="rtl">
 <p class="cover-kicker">إعداد عربي تعليمي · {html.escape(edition['label'])}</p>
 <p class="cover-title">كيف يعمل<br />لينكس</p>
-<p class="cover-subtitle">من فهم الصورة العامة<br />إلى ملاحظة النظام بنفسك</p>
+<p class="cover-subtitle">{subtitle}</p>
 <p class="cover-credit">استنادًا إلى كتاب</p>
 <p class="cover-author">برايان وارد</p>
 <p class="cover-original" dir="ltr">How Linux Works<br />What Every Superuser Should Know<br />Second edition · No Starch Press</p>
-<div class="cover-scope" dir="rtl"><strong>مقدمة · الفصل الأول · معجم · مختبر</strong><br />
-مسودة تعليمية جزئية، وليست ترجمة حرفية أو رسمية.<br />الفصول من الثاني إلى السابع عشر لم تُعد بعد.</div>
+<div class="cover-scope" dir="rtl"><strong>{html.escape(edition['cover_scope'])}</strong><br />
+مسودة تعليمية جزئية، وليست ترجمة حرفية أو رسمية.<br />{html.escape(edition['pending_note'])}</div>
 <p class="cover-date">{html.escape(edition['date_ar'])} · Markdown + PDF</p>
 </div>'''
 
@@ -223,8 +275,7 @@ def toc_entries(documents: list[dict[str, Any]]) -> list[dict[str, Any]]:
     entries = []
     for document in documents:
         entries.extend(h for h in document["headings"]
-                       if h["level"] == 1 or
-                       (document["id"] == "chapter-1" and h["level"] == 2))
+                       if h["level"] <= document.get("toc_depth", 1))
     entries.append({"id": "roadmap", "title": "خريطة إنجاز الكتاب", "level": 1})
     return entries
 
@@ -257,7 +308,7 @@ def compose_html(data: dict[str, Any], documents: list[dict[str, Any]],
     roadmap = '<div class="chapter roadmap" dir="rtl">' + enforce_direction(roadmap) + '</div>'
     return (
         '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8" />'
-        '<title>كيف يعمل لينكس — الدفعة الأولى</title></head><body dir="rtl">'
+        f'<title>{html.escape(data["edition"]["title"])} — {html.escape(data["edition"]["label"])}</title></head><body dir="rtl">'
         + cover_html(data) + contents + chapters + roadmap + '</body></html>'
     )
 
@@ -325,8 +376,11 @@ def combined_markdown(data: dict[str, Any], documents: list[dict[str, Any]]) -> 
     return "\n".join(lines)
 
 
-def inline_styles(markup: str) -> str:
+def inline_styles(markup: str, data: dict[str, Any] | None = None) -> str:
+    data = data or load_manifest()
     css = STYLESHEET.read_text(encoding="utf-8")
+    header = f"{data['edition']['title']} · إعداد عربي تعليمي · {data['edition']['label']}"
+    css = css.replace('"__BOOK_RUNNING_HEADER__"', json.dumps(header, ensure_ascii=False))
 
     def font_url(match: re.Match[str]) -> str:
         path = (FONTS / match[1]).resolve()
@@ -341,6 +395,7 @@ def inline_styles(markup: str) -> str:
 
 def build(output_dir: Path, *, root: Path = ROOT) -> dict[str, Any]:
     data = load_manifest(root)
+    verify_archives(data, root)
     documents = prepare_documents(data, root)
     markup = compose_html(data, documents)
     check_html(markup)
@@ -349,7 +404,7 @@ def build(output_dir: Path, *, root: Path = ROOT) -> dict[str, Any]:
         source = scratch / "book.html"
         raw_pdf = scratch / "book.pdf"
         report_path = scratch / "pagination.json"
-        source.write_text(inline_styles(markup), encoding="utf-8")
+        source.write_text(inline_styles(markup, data), encoding="utf-8")
         try:
             subprocess.run(
                 ["node", str(ROOT / "scripts/render_pdf.mjs"), str(source),
@@ -378,10 +433,12 @@ def build(output_dir: Path, *, root: Path = ROOT) -> dict[str, Any]:
             pdf.set_toc([[h["level"], h["title"], pages[h["id"]]] for h in headings], collapse=1)
             date = data["edition"]["date"].replace("-", "")
             pdf.set_metadata({
-                "title": "كيف يعمل لينكس — الدفعة الأولى (إعداد تعليمي جزئي)",
+                "title": f"{data['edition']['title']} — {data['edition']['label']} (إعداد تعليمي جزئي)",
                 "author": "Arabic educational adaptation based on Brian Ward's book",
                 "subject": data["edition"]["scope_note"],
-                "keywords": "Arabic, Linux, beginner, partial adaptation, Chapter 1",
+                "keywords": "Arabic, Linux, beginner, partial adaptation, " + ", ".join(
+                    f"Chapter {ch['number']}" for ch in data["chapters"] if ch["status"] == "draft"
+                ),
                 "creator": "scripts/build_book.py + scripts/render_pdf.mjs",
                 "producer": pdf.metadata.get("producer", "Chromium"),
                 "creationDate": f"D:{date}000000",
@@ -408,6 +465,7 @@ def main() -> None:
     args = parser.parse_args()
     try:
         data = load_manifest()
+        verify_archives(data)
         for font in ("Amiri-Regular.ttf", "Amiri-Bold.ttf", "FiraMono-Regular.ttf"):
             if not (FONTS / font).is_file():
                 raise ValueError(f"Missing bundled font: {font}")
@@ -420,7 +478,9 @@ def main() -> None:
         result = build(args.output_dir)
         print(f"PDF: {result['pdf']} ({result['pages']} pages)")
         print(f"Markdown: {result['markdown']}")
-        print("Scope: introduction + Chapter 1; chapters 2–17 remain pending")
+        available = [str(ch["number"]) for ch in data["chapters"] if ch["status"] == "draft"]
+        print(f"Scope: introduction + chapters {', '.join(available)}; "
+              f"{len(data['chapters']) - len(available)} chapters remain pending")
     except (ValueError, OSError, KeyError) as exc:
         parser.exit(1, f"Book build failed: {exc}\n")
 

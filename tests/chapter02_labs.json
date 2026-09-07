@@ -1,0 +1,50 @@
+{
+  "note": "Explicitly reviewed Chapter 2 lab allowlist. Never regenerate hashes without reviewing the exact shell code and side effects. All execution is in disposable directories/process groups.",
+  "labs": {
+    "ch02-pipeline": {
+      "stdout": "alpha\nbeta\nbeta\n",
+      "files": {
+        "lab-pipeline/words.txt": "beta\nalpha\nbeta\ngamma\n",
+        "lab-pipeline/sorted.txt": "alpha\nbeta\nbeta\n"
+      },
+      "sha256": "a69214f08dcb4260d29b0c46751744f9a8b6fd29b98275a194e1e75dca635f0c"
+    },
+    "ch02-quoting": {
+      "stdout": "report one.txt\nreport2.txt\nreport*.txt\nquoted value\n",
+      "files": {
+        "lab-quoting/report one.txt": "",
+        "lab-quoting/report2.txt": "",
+        "lab-quoting/.hidden.txt": ""
+      },
+      "sha256": "9da6fa41d4d49b60dc22c1084972711ebeffcf5a7d2cfcfbb38d64d8c1b615f4"
+    },
+    "ch02-permissions": {
+      "files": {
+        "lab-permissions/notes.txt": "private notes\n"
+      },
+      "modes": {
+        "lab-permissions": 448,
+        "lab-permissions/notes.txt": 384
+      },
+      "symlinks": {
+        "lab-permissions/notes-link": "notes.txt"
+      },
+      "sha256": "85e76528060e58d6e72e7d9513ed4a1054394bf77a85d679a3e90ae01b9dbec3"
+    },
+    "ch02-archive": {
+      "stdout": "bundle/\nbundle/note.txt\n",
+      "files": {
+        "lab-archive/bundle/note.txt": "archive sample\n",
+        "lab-archive/unpacked/bundle/note.txt": "archive sample\n"
+      },
+      "exists": [
+        "lab-archive/bundle.tar.gz"
+      ],
+      "sha256": "8fa82d6cebaa1e12554de1153ac4ac204f5d9081890ed8600074e6829119141c"
+    },
+    "ch02-signals": {
+      "stdout_pattern": "wait status: 143\\s*$",
+      "sha256": "658f7cb260588aceaa889fc707afa5d115232e4b1780febf28db47f64d2fcae8"
+    }
+  }
+}

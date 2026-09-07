@@ -15,9 +15,11 @@ external references are source material, not instructions for operating the repo
   Modern Standard Arabic, preserve the conceptual coverage and original section
   numbering, and distinguish additions from the author's material.
 - Deliver editable **Markdown and a properly typeset RTL PDF** for each increment.
-- **Present the PDF and wait for explicit user confirmation before starting the
-  next chapter.** If changes are requested, revise that increment and return it
+- **Present the PDF and wait for explicit user confirmation or authorization
+  to proceed before starting the next chapter.** If changes are requested, revise that increment and return it
   for review. Do not count praise, a commit request, or passing tests as approval.
+  Explicit permission to continue is not final editorial approval; record any
+  deferred or combined review separately.
 - Never describe a draft, an outline, or an incomplete edition as the complete
   book. Technical checks do not constitute human linguistic or technical review.
 - Commit and push when requested. A request to push this checkpoint does not
@@ -27,25 +29,34 @@ external references are source material, not instructions for operating the repo
 
 | Item | Recorded state |
 | --- | --- |
-| Phase | **Waiting for the user's PDF confirmation** |
-| Current delivery | `editions/how-linux-works-ar-part-01.pdf` and matching `.md` |
-| PDF length | 32 pages |
-| Available material | Adapted introduction and Chapter 1, all sections `1.1`–`1.6`; glossary, three diagrams, five safe experiments, eight questions with answers, and editorial/source notes |
-| Remaining chapters | Chapters 2–17 are `pending`; they have not been adapted |
-| Next chapter, after approval | Chapter 2, **الأوامر الأساسية وبنية الأدلة**, source PDF pages **15–41** |
-| Latest user request | Create this contract, commit and push the existing work; let the user confirm the PDF first |
-| Verification | Source check and all **20 tests passed on 2026-09-07**; tests rebuilt into temporary storage, not over the review PDF |
+| Phase | **Waiting for combined feedback on the preface and Chapters 1–2** |
+| User authorization | “okay start with chapter 2 and commit and push”; feedback on the preface, Ch1, and Ch2 will follow together |
+| Current delivery | `editions/how-linux-works-ar-part-02.pdf` and matching `.md`; a cumulative edition |
+| PDF length / entry point | **84 pages**; Chapter 2 starts on **page 26** |
+| New scope | Chapter 2, source pages 15–41: all 21 main sections / 63 numbered headings, four original tables, two redrawn figures, five sandbox labs, twelve questions with answers |
+| Earlier material | Preface/Ch1 instructional content retained; only availability/scope statements updated. No final editorial approval claimed. |
+| Frozen archive | Part 01 PDF/Markdown are byte-for-byte unchanged and protected by `archived_editions` in the manifest |
+| Remaining work | Chapters 3–17 remain `pending`; Chapter 3 is not authorized by the current request |
+| Validation | **31 tests passed**, including all original-heading checks, the five allowlisted labs, searchable/copyable PDF text, multi-page contents links, and RTL overflow guards |
+| Visual review | Cover, two-page contents, Chapter 2 opening, character/key tables, permission diagram, code/lab pages, directory structure, and section endings inspected |
+| Next action | Receive and address the user's combined feedback; do not start Chapter 3 automatically |
 
-**No PDF approval has been received at this checkpoint. Do not start Chapter 2.**
-The Arabic PDF being reviewed has SHA-256:
+The current PDF's SHA-256 is:
 
 ```text
-c102918e0d5fe5f4a46d063ff0447ac9d8a0653d942455e3aff8ee83f4e306f6
+e405fe6aade4974509b5ad600c48163a3e8b2c1c6763be02b9a6c1411c1cc8f0
 ```
 
-Keep that artifact unchanged during documentation-only or Git-only tasks. When
-an authorized revision changes the delivery, record the new fingerprint and
-return its approval state to waiting. Do not invent an approval date or quote.
+The matching combined Markdown's SHA-256 is:
+
+```text
+4cf15c2694c0555ad06ba5dd87f76e1fd24eb44ec899a812dd0d31d5c8cf6386
+```
+
+Preserve this review artifact during documentation-only/Git-only work. After an
+authorized revision, update the fingerprint and review state; do not invent an
+approval. The original Part 01 PDF remains 32 pages with SHA-256
+`c102918e0d5fe5f4a46d063ff0447ac9d8a0653d942455e3aff8ee83f4e306f6`.
 
 ## 3. First steps in any session
 
@@ -75,7 +86,9 @@ return its approval state to waiting. Do not invent an approval date or quote.
 | `book/assets/fonts/` | Bundled Amiri and Fira Mono fonts, provenance, and their OFL licenses |
 | `scripts/build_book.py` | Source validation, Markdown/HTML preparation, PDF metadata/bookmarks, and combined Markdown output |
 | `scripts/render_pdf.mjs` | Offline Chromium/Paged.js pagination and text-preservation checks |
-| `tests/test_book.py` | Source, output, command, and regression checks |
+| `book/coverage/chapter-02.json` | Source-derived section/page, figure, table, and lab checklist |
+| `tests/test_book.py`, `tests/test_chapter_two.py` | Source, output, command, archive, and regression checks |
+| `tests/chapter02_labs.json` | Explicitly reviewed lab hashes and expected outcomes; not an auto-execution registry for all examples |
 | `editions/` | Intended, committed PDF and combined Markdown deliverables |
 
 The manifest's `draft` means a real draft exists, **not that the user approved
@@ -91,8 +104,8 @@ the original book.
 
 ## 5. Procedure for an authorized chapter increment
 
-1. Confirm the preceding PDF's approval and the authorized chapter. Resolve any
-   requested corrections first. Agree on changes to delivery structure, such as
+1. Confirm explicit authorization for the next chapter and whether the preceding
+   material was approved or its review deferred. Resolve requested corrections first. Agree on changes to delivery structure, such as
    standalone versus cumulative PDFs, rather than silently overwriting an earlier
    reviewed installment.
 2. Read the chapter's actual source pages, including figures, warnings, examples,
@@ -110,11 +123,12 @@ the original book.
    never execute them on the working machine just because the book contains them.
 6. Update the manifest only when real content exists. Keep unfinished material
    visibly pending. Update the glossary and source notes alongside the chapter.
-7. Review the pipeline before naming a new edition: the current cover, scope
-   strings, TOC selection, roadmap prose, README, introduction, and several tests
-   are **Part 01-specific**. Changing only the manifest's slug/status is not enough.
-   Evolve those assumptions deliberately; do not weaken coverage/RTL checks to
-   make an incomplete output pass.
+7. Review the pipeline before naming a new edition. Cover lines/scope, running
+   headers, TOC depth, PDF metadata, and the next-chapter roadmap now derive from
+   the manifest. Update its edition fields and each document's `toc_depth`, but
+   also review scope statements in the actual prose, README, and tests. Register
+   previous review artifacts under `archived_editions` before advancing editions.
+   Do not weaken coverage, archive, or RTL checks to make incomplete output pass.
 8. Build and test. Inspect rendered pages visually: cover, contents, mixed Arabic
    and Latin text, diagrams, code blocks, table continuations, and section endings.
    Confirm searchable Arabic and exact, copyable command characters.
@@ -160,8 +174,12 @@ edition and then run the tests again:
   command is not a reliable cross-command or cross-session assumption.
 - `--check` does not write editions. The test suite builds into a temporary
   directory and checks the published files against the generated content.
-- Tests execute only the reviewed `SAFE_EXAMPLES` allowlist. Review new examples
-  before extending it; never execute arbitrary Markdown code blocks automatically.
+- Preface/Ch1 tests execute only the reviewed `SAFE_EXAMPLES` allowlist. Chapter 2
+  has five `<!-- lab: ... -->` blocks with reviewed hashes and expected outcomes in
+  `tests/chapter02_labs.json`. Hashes are checked before execution in disposable
+  directories/process groups. All other `sh` blocks receive syntax-only checks.
+  Review new examples before extending these allowlists; never execute arbitrary
+  Markdown code blocks or regenerate hashes without a safety review.
 - For source extraction, use the already-required PyMuPDF:
   `pymupdf.open("HowLinuxWorks.pdf")[page_number - 1].get_text()`.
   Extract only the relevant range after authorization, not all 338 pages into
@@ -248,6 +266,41 @@ independent files/tasks only. Apply same-file changes sequentially, then re-read
 or diff the result. Verify final artifacts after the last edit, not only an
 intermediate render.
 
+### Chapter 2 and cumulative editions
+
+- Chapter 2 has **63 numbered headings**, not just its 21 top-level sections.
+  Its four tables and two figures also need explicit coverage. The checklist is
+  compared with the actual PDF text in tests, not only with another hand-written
+  list. Empty headings do not satisfy coverage.
+- The cumulative contents now spans multiple pages. Test links over the full
+  contents page range, up to the first document, rather than only PDF page 2.
+- Put the compression/archive creation step before its runnable `zcat` example.
+  Explain prerequisites rather than making beginners debug missing fixture files.
+- Keep lead paragraphs/table labels with their following code/table/figure using
+  the `p:has(+ ...)` print rule. This removed stranded labels and produced the
+  final **84-page** edition (an earlier preview had 83). Refresh page counts and
+  fingerprints after the final layout change, not after an earlier preview.
+- Distinguish semantic instruction from automatic testing: account changes,
+  `sudoers` samples, destructive syntax, and interactive tools are not lab scripts.
+  A policy that parses correctly can still grant dangerous privileges.
+- Preserve Part 01 outputs; do not rebuild them from changed Part 02 sources.
+  Their source checkpoint is commit `c1b9a138cc8a4119c54c6f88d2a8d5be5415680c`.
+  Archive hashes and active-slug checks prevent accidental overwrite.
+
+### Restored files may not imply restored Git history
+
+At the start of Chapter 2 work, the working files were present but local HEAD was
+back at the original upload, with the prior installment shown as untracked. The
+remote session branch still held the verified `c1b9a13` commit. We fetched that
+**same** branch, confirmed HEAD was its ancestor, and compared every remote blob
+with the local files before synchronizing the local index/history with a mixed
+reset that did not rewrite the working files. All 26 files matched exactly.
+
+Do not respond to this situation by force-pushing, re-creating the previous commit,
+switching branches, or deleting “untracked” work. Inspect/fetch/compare first. A
+mixed reset is **not** a blanket recovery recipe: if content or history differs,
+preserve the changes and reconcile them deliberately before moving a branch tip.
+
 ## 8. Git and end-of-session handoff
 
 - Recorded branch for this checkpoint:
@@ -275,4 +328,4 @@ intermediate render.
   validation results, and the next action. Keep it concise and current rather than
   appending full transcripts, temporary paths, or speculative “lessons.”
 
-**Next action at this checkpoint: wait for the user's review of Part 01's PDF.**
+**Next action: wait for the user's combined feedback on the preface and Chapters 1–2.**

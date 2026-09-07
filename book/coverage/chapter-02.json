@@ -1,0 +1,404 @@
+{
+  "chapter": 2,
+  "source_pages": [
+    15,
+    41
+  ],
+  "sections": [
+    {
+      "number": "2.1",
+      "title_en": "The Bourne Shell: /bin/sh",
+      "source_page": 15,
+      "title_ar": "صدفة بورن: المسار `/bin/sh`"
+    },
+    {
+      "number": "2.2",
+      "title_en": "Using the Shell",
+      "source_page": 16,
+      "title_ar": "استخدام الصدفة"
+    },
+    {
+      "number": "2.2.1",
+      "title_en": "The Shell Window",
+      "source_page": 16,
+      "title_ar": "نافذة الصدفة"
+    },
+    {
+      "number": "2.2.2",
+      "title_en": "cat",
+      "source_page": 16,
+      "title_ar": "الأمر `cat`"
+    },
+    {
+      "number": "2.2.3",
+      "title_en": "Standard Input and Standard Output",
+      "source_page": 16,
+      "title_ar": "الإدخال القياسي والإخراج القياسي"
+    },
+    {
+      "number": "2.3",
+      "title_en": "Basic Commands",
+      "source_page": 17,
+      "title_ar": "أوامر أساسية"
+    },
+    {
+      "number": "2.3.1",
+      "title_en": "ls",
+      "source_page": 17,
+      "title_ar": "الأمر `ls`"
+    },
+    {
+      "number": "2.3.2",
+      "title_en": "cp",
+      "source_page": 18,
+      "title_ar": "الأمر `cp`"
+    },
+    {
+      "number": "2.3.3",
+      "title_en": "mv",
+      "source_page": 18,
+      "title_ar": "الأمر `mv`"
+    },
+    {
+      "number": "2.3.4",
+      "title_en": "touch",
+      "source_page": 18,
+      "title_ar": "الأمر `touch`"
+    },
+    {
+      "number": "2.3.5",
+      "title_en": "rm",
+      "source_page": 18,
+      "title_ar": "الأمر `rm`"
+    },
+    {
+      "number": "2.3.6",
+      "title_en": "echo",
+      "source_page": 18,
+      "title_ar": "الأمر `echo`"
+    },
+    {
+      "number": "2.4",
+      "title_en": "Navigating Directories",
+      "source_page": 18,
+      "title_ar": "التنقل بين الأدلة"
+    },
+    {
+      "number": "2.4.1",
+      "title_en": "cd",
+      "source_page": 19,
+      "title_ar": "الأمر `cd`"
+    },
+    {
+      "number": "2.4.2",
+      "title_en": "mkdir",
+      "source_page": 19,
+      "title_ar": "الأمر `mkdir`"
+    },
+    {
+      "number": "2.4.3",
+      "title_en": "rmdir",
+      "source_page": 19,
+      "title_ar": "الأمر `rmdir`"
+    },
+    {
+      "number": "2.4.4",
+      "title_en": "Shell Globbing (Wildcards)",
+      "source_page": 19,
+      "title_ar": "توسعة أنماط أسماء الملفات"
+    },
+    {
+      "number": "2.5",
+      "title_en": "Intermediate Commands",
+      "source_page": 20,
+      "title_ar": "أوامر متوسطة المستوى"
+    },
+    {
+      "number": "2.5.1",
+      "title_en": "grep",
+      "source_page": 20,
+      "title_ar": "الأمر `grep`"
+    },
+    {
+      "number": "2.5.2",
+      "title_en": "less",
+      "source_page": 21,
+      "title_ar": "الأمر `less`"
+    },
+    {
+      "number": "2.5.3",
+      "title_en": "pwd",
+      "source_page": 21,
+      "title_ar": "الأمر `pwd`"
+    },
+    {
+      "number": "2.5.4",
+      "title_en": "diff",
+      "source_page": 21,
+      "title_ar": "الأمر `diff`"
+    },
+    {
+      "number": "2.5.5",
+      "title_en": "file",
+      "source_page": 21,
+      "title_ar": "الأمر `file`"
+    },
+    {
+      "number": "2.5.6",
+      "title_en": "find and locate",
+      "source_page": 22,
+      "title_ar": "الأمران `find` و`locate`"
+    },
+    {
+      "number": "2.5.7",
+      "title_en": "head and tail",
+      "source_page": 22,
+      "title_ar": "الأمران `head` و`tail`"
+    },
+    {
+      "number": "2.5.8",
+      "title_en": "sort",
+      "source_page": 22,
+      "title_ar": "الأمر `sort`"
+    },
+    {
+      "number": "2.6",
+      "title_en": "Changing Your Password and Shell",
+      "source_page": 22,
+      "title_ar": "تغيير كلمة المرور وصدفة الدخول"
+    },
+    {
+      "number": "2.7",
+      "title_en": "Dot Files",
+      "source_page": 22,
+      "title_ar": "الملفات النقطية"
+    },
+    {
+      "number": "2.8",
+      "title_en": "Environment and Shell Variables",
+      "source_page": 23,
+      "title_ar": "متغيرات الصدفة ومتغيرات البيئة"
+    },
+    {
+      "number": "2.9",
+      "title_en": "The Command Path",
+      "source_page": 23,
+      "title_ar": "مسار البحث عن الأوامر"
+    },
+    {
+      "number": "2.10",
+      "title_en": "Special Characters",
+      "source_page": 24,
+      "title_ar": "المحارف الخاصة"
+    },
+    {
+      "number": "2.11",
+      "title_en": "Command-Line Editing",
+      "source_page": 25,
+      "title_ar": "تحرير سطر الأوامر"
+    },
+    {
+      "number": "2.12",
+      "title_en": "Text Editors",
+      "source_page": 25,
+      "title_ar": "محررات النصوص"
+    },
+    {
+      "number": "2.13",
+      "title_en": "Getting Online Help",
+      "source_page": 26,
+      "title_ar": "الحصول على المساعدة والتوثيق"
+    },
+    {
+      "number": "2.14",
+      "title_en": "Shell Input and Output",
+      "source_page": 28,
+      "title_ar": "إدخال الصدفة وإخراجها"
+    },
+    {
+      "number": "2.14.1",
+      "title_en": "Standard Error",
+      "source_page": 28,
+      "title_ar": "الإخراج القياسي للأخطاء"
+    },
+    {
+      "number": "2.14.2",
+      "title_en": "Standard Input Redirection",
+      "source_page": 29,
+      "title_ar": "إعادة توجيه الإدخال القياسي"
+    },
+    {
+      "number": "2.15",
+      "title_en": "Understanding Error Messages",
+      "source_page": 29,
+      "title_ar": "فهم رسائل الخطأ"
+    },
+    {
+      "number": "2.15.1",
+      "title_en": "Anatomy of a UNIX Error Message",
+      "source_page": 29,
+      "title_ar": "تشريح رسالة خطأ في يونكس"
+    },
+    {
+      "number": "2.15.2",
+      "title_en": "Common Errors",
+      "source_page": 29,
+      "title_ar": "أخطاء شائعة"
+    },
+    {
+      "number": "2.16",
+      "title_en": "Listing and Manipulating Processes",
+      "source_page": 30,
+      "title_ar": "عرض العمليات والتعامل معها"
+    },
+    {
+      "number": "2.16.1",
+      "title_en": "Command Options",
+      "source_page": 31,
+      "title_ar": "خيارات الأمر"
+    },
+    {
+      "number": "2.16.2",
+      "title_en": "Killing Processes",
+      "source_page": 31,
+      "title_ar": "إنهاء العمليات وإرسال الإشارات"
+    },
+    {
+      "number": "2.16.3",
+      "title_en": "Job Control",
+      "source_page": 32,
+      "title_ar": "التحكم في المهام"
+    },
+    {
+      "number": "2.16.4",
+      "title_en": "Background Processes",
+      "source_page": 32,
+      "title_ar": "العمليات في الخلفية"
+    },
+    {
+      "number": "2.17",
+      "title_en": "File Modes and Permissions",
+      "source_page": 33,
+      "title_ar": "أنماط الملفات وأذونات الوصول"
+    },
+    {
+      "number": "2.17.1",
+      "title_en": "Modifying Permissions",
+      "source_page": 34,
+      "title_ar": "تعديل الأذونات"
+    },
+    {
+      "number": "2.17.2",
+      "title_en": "Symbolic Links",
+      "source_page": 35,
+      "title_ar": "الروابط الرمزية"
+    },
+    {
+      "number": "2.17.3",
+      "title_en": "Creating Symbolic Links",
+      "source_page": 35,
+      "title_ar": "إنشاء الروابط الرمزية"
+    },
+    {
+      "number": "2.18",
+      "title_en": "Archiving and Compressing Files",
+      "source_page": 36,
+      "title_ar": "أرشفة الملفات وضغطها"
+    },
+    {
+      "number": "2.18.1",
+      "title_en": "gzip",
+      "source_page": 36,
+      "title_ar": "الأداة `gzip`"
+    },
+    {
+      "number": "2.18.2",
+      "title_en": "tar",
+      "source_page": 36,
+      "title_ar": "الأداة `tar`"
+    },
+    {
+      "number": "2.18.3",
+      "title_en": "Compressed Archives (.tar.gz)",
+      "source_page": 37,
+      "title_ar": "الأرشيفات المضغوطة `.tar.gz`"
+    },
+    {
+      "number": "2.18.4",
+      "title_en": "zcat",
+      "source_page": 37,
+      "title_ar": "الأداة `zcat`"
+    },
+    {
+      "number": "2.18.5",
+      "title_en": "Other Compression Utilities",
+      "source_page": 37,
+      "title_ar": "أدوات ضغط أخرى"
+    },
+    {
+      "number": "2.19",
+      "title_en": "Linux Directory Hierarchy Essentials",
+      "source_page": 38,
+      "title_ar": "أساسيات بنية الأدلة في لينكس"
+    },
+    {
+      "number": "2.19.1",
+      "title_en": "Other Root Subdirectories",
+      "source_page": 39,
+      "title_ar": "أدلة أخرى تحت الجذر"
+    },
+    {
+      "number": "2.19.2",
+      "title_en": "The /usr Directory",
+      "source_page": 39,
+      "title_ar": "الدليل `/usr`"
+    },
+    {
+      "number": "2.19.3",
+      "title_en": "Kernel Location",
+      "source_page": 39,
+      "title_ar": "موضع النواة"
+    },
+    {
+      "number": "2.20",
+      "title_en": "Running Commands as the Superuser",
+      "source_page": 40,
+      "title_ar": "تشغيل أوامر بصلاحيات المستخدم الأعلى"
+    },
+    {
+      "number": "2.20.1",
+      "title_en": "sudo",
+      "source_page": 40,
+      "title_ar": "الأداة `sudo`"
+    },
+    {
+      "number": "2.20.2",
+      "title_en": "/etc/sudoers",
+      "source_page": 40,
+      "title_ar": "الملف `/etc/sudoers`"
+    },
+    {
+      "number": "2.21",
+      "title_en": "Looking Forward",
+      "source_page": 41,
+      "title_ar": "إلى أين نتجه بعد ذلك؟"
+    }
+  ],
+  "figures": [
+    "2-1",
+    "2-2"
+  ],
+  "tables": [
+    "2-1",
+    "2-2",
+    "2-3",
+    "2-4"
+  ],
+  "labs": [
+    "ch02-pipeline",
+    "ch02-quoting",
+    "ch02-permissions",
+    "ch02-archive",
+    "ch02-signals"
+  ]
+}

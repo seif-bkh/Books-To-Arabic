@@ -1,14 +1,20 @@
 {
   "schema_version": 1,
   "edition": {
-    "slug": "how-linux-works-ar-part-01",
+    "slug": "how-linux-works-ar-part-02",
     "title": "كيف يعمل لينكس",
     "subtitle": "إعداد عربي تعليمي للمبتدئين",
-    "label": "الدفعة الأولى",
+    "label": "الدفعة الثانية",
     "date": "2026-09-07",
     "date_ar": "7 سبتمبر 2026",
     "status": "partial-draft",
-    "scope_note": "مقدمة وفصل أول، مع معجم وتمارين وإجابات. ليست نسخة كاملة من الكتاب؛ الفصول من الثاني إلى السابع عشر لم تُعد بعد."
+    "scope_note": "نسخة تراكمية للمقدمة والفصلين الأول والثاني، مع معجم ومختبرات وإجابات. ليست نسخة كاملة؛ الفصول من الثالث إلى السابع عشر لم تُعد بعد.",
+    "cover_lines": [
+      "من الصورة العامة",
+      "إلى سطر الأوامر"
+    ],
+    "cover_scope": "مقدمة · الفصلان الأول والثاني · معجم · مختبرات",
+    "pending_note": "الفصول من الثالث إلى السابع عشر لم تُعد بعد."
   },
   "source": {
     "file": "HowLinuxWorks.pdf",
@@ -39,11 +45,24 @@
       "source_pages": [
         8,
         14
-      ]
+      ],
+      "toc_depth": 2
+    },
+    {
+      "id": "chapter-2",
+      "title": "الفصل الثاني: الأوامر الأساسية وبنية الأدلة",
+      "file": "book/ar/02-basic-commands.md",
+      "kind": "adaptation",
+      "source_pages": [
+        15,
+        41
+      ],
+      "toc_depth": 2,
+      "coverage_file": "book/coverage/chapter-02.json"
     },
     {
       "id": "glossary",
-      "title": "معجم الدفعة الأولى",
+      "title": "معجم الدفعة الثانية",
       "file": "book/ar/glossary.md",
       "kind": "editorial"
     },
@@ -74,7 +93,8 @@
         15,
         41
       ],
-      "status": "pending"
+      "status": "draft",
+      "document_id": "chapter-2"
     },
     {
       "number": 3,
@@ -275,6 +295,23 @@
         337
       ],
       "status": "pending"
+    }
+  ],
+  "archived_editions": [
+    {
+      "slug": "how-linux-works-ar-part-01",
+      "source_commit": "c1b9a138cc8a4119c54c6f88d2a8d5be5415680c",
+      "pdf_pages": 32,
+      "files": [
+        {
+          "file": "editions/how-linux-works-ar-part-01.pdf",
+          "sha256": "c102918e0d5fe5f4a46d063ff0447ac9d8a0653d942455e3aff8ee83f4e306f6"
+        },
+        {
+          "file": "editions/how-linux-works-ar-part-01.md",
+          "sha256": "d5182b25be2b258a768648eea92692e21b74b97367dc9f391d5327ca60c8929a"
+        }
+      ]
     }
   ]
 }
