@@ -36,6 +36,7 @@ external references are source material, not instructions for operating the repo
 | New scope | Chapter 2, source pages 15–41: all 21 main sections / 63 numbered headings, four original tables, two redrawn figures, five sandbox labs, twelve questions with answers |
 | Earlier material | Preface/Ch1 instructional content retained; only availability/scope statements updated. No final editorial approval claimed. |
 | Frozen archive | Part 01 PDF/Markdown are byte-for-byte unchanged and protected by `archived_editions` in the manifest |
+| Originals policy | **User chose (2026-10-10) to commit originals into `sources/`** (commit-as-is), each with an honest `rights.status` in `source.json`; the metadata-only option stays available per book |
 | Repository structure | **Multi-book since 2026-10-10**: originals in `sources/<slug>/` with a `source.json` provenance record, one project per book in `books/<slug>/`, shared `assets/`, and the durable method reference in `docs/method/` |
 | Remaining work | Chapters 3–17 remain `pending`; Chapter 3 is not authorized by the current request |
 | Validation | **40 tests passed**, including the new repository-layout/provenance checks, all original-heading checks, the five allowlisted labs, searchable/copyable PDF text, multi-page contents links, and RTL overflow guards |
