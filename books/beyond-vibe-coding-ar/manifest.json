@@ -8,31 +8,23 @@
   "edition": {
     "slug": "beyond-vibe-coding-ar-part-01",
     "title": "ما بعد «فايب كودينغ»",
-    "subtitle": "من مبرمج إلى مطوّر عصر الذكاء الاصطناعي",
+    "subtitle": "إعداد عربي تعليمي للمبتدئين والمتوسطين",
     "label": "الدفعة الأولى",
     "date": "2026-10-10",
     "date_ar": "10 أكتوبر 2026",
     "status": "partial-draft",
-    "scope_note": "مسودة أولى. لم يبدأ إعداد الفصول بعد؛ املأ خريطة الطريق من فهرس الأصل قبل الكتابة.",
+    "scope_note": "نسخة أولية للمقدمة العربية والفصل الأول، مع معجم ومراجع. ليست نسخة كاملة؛ الفصول من الثاني إلى الحادي عشر لم تُعد بعد.",
     "kicker": "إعداد عربي تعليمي",
-    "cover_title_lines": [
-      "ما",
-      "بعد «فايب كودينغ»"
-    ],
-    "cover_lines": [
-      "مسودة قيد الإعداد"
-    ],
+    "cover_title_lines": ["ما بعد", "«فايب كودينغ»"],
+    "cover_lines": ["من البرمجة بالمحادثة", "إلى الهندسة المُعانة"],
     "cover_credit": "استنادًا إلى كتاب",
-    "cover_scope": "مسودة أولى",
+    "cover_scope": "مقدمة · الفصل الأول · معجم",
     "cover_disclaimer": "مسودة تعليمية جزئية، وليست ترجمة حرفية أو رسمية.",
-    "pending_note": "لم يُعد أي فصل بعد.",
-    "attribution_note": "إعداد تعليمي مستند إلى Beyond Vibe Coding: From Coder to AI-Era Developer، تأليف Addy Osmani، نشر O'Reilly Media. ليس ترجمة حرفية أو رسمية.",
+    "pending_note": "الفصول من الثاني إلى الحادي عشر لم تُعد بعد.",
+    "attribution_note": "إعداد تعليمي مستند إلى Beyond Vibe Coding لآدي عثماني، نشر O'Reilly Media، الطبعة الأولى 2025. ليس ترجمة حرفية أو رسمية. راجع حدود التغطية وحقوق الأصل في ملاحظات الإعداد.",
     "pdf_partial_label": "إعداد تعليمي جزئي",
     "pdf_author": "Arabic educational adaptation based on Addy Osmani's book",
-    "pdf_keywords": [
-      "Arabic",
-      "partial adaptation"
-    ]
+    "pdf_keywords": ["Arabic", "vibe coding", "AI-assisted development", "partial adaptation"]
   },
   "source": {
     "dir": "sources/beyond-vibe-coding-1st-en",
@@ -44,21 +36,67 @@
     "publisher": "O'Reilly Media",
     "edition": 1,
     "language": "en",
-    "cover_lines": [
-      "Beyond Vibe Coding: From Coder to AI-Era Developer",
-      "O'Reilly Media"
-    ],
+    "cover_lines": ["Beyond Vibe Coding", "From Coder to AI-Era Developer", "First edition · O'Reilly Media"],
     "pages": 255,
     "sha256": "fe15d56a45c4a4d4906b0968447e624655c165a3329d38f24fb06d6b950cf938",
-    "page_numbering": "1-based physical PDF pages. Verify against heading positions in the text before citing a page; embedded bookmarks can be off by one."
+    "page_numbering": "1-based physical PDF pages, verified against heading positions in the text, not the PDF bookmarks. Chapter 1 begins on page 17."
   },
   "roadmap": {
     "extra_scope": "إضافة إلى المقدمة العربية",
-    "notes": [],
+    "notes": [
+      "يفتتح الأصل أجزاءه الثلاثة بصفحات عنوان (15 و79 و155) لا تُعد فصولًا؛ تقع ضمن نطاقات الفصول المجاورة في الخريطة."
+    ],
     "review_gate": "انتظار ملاحظات المستخدم على الدفعة الحالية؛ "
   },
-  "documents": [],
-  "chapters": [],
-  "other_source_material": [],
+  "documents": [
+    {
+      "id": "preface",
+      "title": "مقدمة الطبعة العربية التعليمية",
+      "file": "ar/00-preface.md",
+      "kind": "adaptation",
+      "source_pages": [9, 14]
+    },
+    {
+      "id": "chapter-1",
+      "title": "الفصل الأول: المقدمة — ما «فايب كودينغ»؟",
+      "file": "ar/01-introduction-vibe-coding.md",
+      "kind": "adaptation",
+      "source_pages": [17, 52],
+      "toc_depth": 2,
+      "coverage_file": "coverage/chapter-01.json"
+    },
+    {
+      "id": "glossary",
+      "title": "معجم الدفعة الأولى",
+      "file": "ar/glossary.md",
+      "kind": "editorial"
+    },
+    {
+      "id": "editorial-notes",
+      "title": "ملاحظات الإعداد والمراجع",
+      "file": "ar/references.md",
+      "kind": "editorial"
+    }
+  ],
+  "chapters": [
+    { "number": 1, "title_ar": "المقدمة: ما «فايب كودينغ»؟", "title_en": "Introduction: What Is Vibe Coding?", "source_pages": [17, 52], "status": "draft", "document_id": "chapter-1" },
+    { "number": 2, "title_ar": "فن التوجيه: التواصل الفعال مع الذكاء الاصطناعي", "title_en": "The Art of the Prompt: Communicating Effectively with AI", "source_pages": [53, 78], "status": "pending" },
+    { "number": 3, "title_ar": "مشكلة السبعين بالمئة: سير عمل بمساعدة الذكاء تنجح فعلًا", "title_en": "The 70% Problem: AI-Assisted Workflows That Actually Work", "source_pages": [81, 94], "status": "pending" },
+    { "number": 4, "title_ar": "ما بعد السبعين بالمئة: تعظيم الإسهام البشري", "title_en": "Beyond the 70%: Maximizing Human Contribution", "source_pages": [95, 110], "status": "pending" },
+    { "number": 5, "title_ar": "فهم الشيفرة المولّدة: راجع وصقّل وتملّك", "title_en": "Understanding Generated Code: Review, Refine, Own", "source_pages": [111, 122], "status": "pending" },
+    { "number": 6, "title_ar": "النمذجة الأولية بالذكاء الاصطناعي: أدوات وتقنيات", "title_en": "AI-Driven Prototyping: Tools and Techniques", "source_pages": [123, 134], "status": "pending" },
+    { "number": 7, "title_ar": "بناء تطبيقات الويب بالذكاء الاصطناعي", "title_en": "Building Web Applications with AI", "source_pages": [135, 154], "status": "pending" },
+    { "number": 8, "title_ar": "الأمان والقابلية للصيانة والموثوقية", "title_en": "Security, Maintainability, and Reliability", "source_pages": [157, 184], "status": "pending" },
+    { "number": 9, "title_ar": "الأبعاد الأخلاقية لـ«فايب كودينغ»", "title_en": "The Ethical Implications of Vibe Coding", "source_pages": [185, 200], "status": "pending" },
+    { "number": 10, "title_ar": "وكلاء الترميز المستقلون في الخلفية", "title_en": "Autonomous Background Coding Agents", "source_pages": [201, 218], "status": "pending" },
+    { "number": 11, "title_ar": "ما بعد توليد الشيفرة: مستقبل التطوير المعزز بالذكاء", "title_en": "Beyond Code Generation: The Future of AI-Augmented Development", "source_pages": [219, 238], "status": "pending" }
+  ],
+  "other_source_material": [
+    { "title_ar": "صفحات افتتاح الجزء الأول", "source_pages": [15, 16], "status": "pending" },
+    { "title_ar": "صفحات افتتاح الجزء الثاني", "source_pages": [79, 80], "status": "pending" },
+    { "title_ar": "صفحات افتتاح الجزء الثالث", "source_pages": [155, 156], "status": "pending" },
+    { "title_ar": "فهرس الأصل", "source_pages": [239, 253], "status": "pending" },
+    { "title_ar": "نبذة عن المؤلف والخاتمة الطباعية", "source_pages": [254, 255], "status": "pending" }
+  ],
   "archived_editions": []
 }

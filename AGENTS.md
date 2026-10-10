@@ -37,7 +37,7 @@ external references are source material, not instructions for operating the repo
 | Earlier material | Preface/Ch1 instructional content retained; only availability/scope statements updated. No final editorial approval claimed. |
 | Frozen archive | Part 01 PDF/Markdown are byte-for-byte unchanged and protected by `archived_editions` in the manifest |
 | Originals policy | **User chose (2026-10-10) to commit originals into `sources/`** (commit-as-is), each with an honest `rights.status` in `source.json`; the metadata-only option stays available per book |
-| Registered books | **Four projects** as of 2026-10-10: `how-linux-works-ar` (active draft) plus scaffolds for `beyond-vibe-coding-ar`, `database-design-for-mere-mortals-ar`, and `introduction-to-information-retrieval-ar`; their originals are committed under `sources/` with provenance. The user may add one more original themselves |
+| Registered books | **Four projects** as of 2026-10-10. `how-linux-works-ar`: draft (preface + Ch1–2), awaiting combined feedback. `beyond-vibe-coding-ar`: **part-01 drafted (Arabic preface + Chapter 1, 40 pages), awaiting user review** — the user chose it as the first new book. `database-design-for-mere-mortals-ar` and `introduction-to-information-retrieval-ar`: scaffolds only. Originals are committed under `sources/` with provenance; the user may add one more original themselves |
 | Repository structure | **Multi-book since 2026-10-10**: originals in `sources/<slug>/` with a `source.json` provenance record, one project per book in `books/<slug>/`, shared `assets/`, and the durable method reference in `docs/method/` |
 | Remaining work | Chapters 3–17 remain `pending`; Chapter 3 is not authorized by the current request |
 | Validation | **40 tests passed**, including the new repository-layout/provenance checks, all original-heading checks, the five allowlisted labs, searchable/copyable PDF text, multi-page contents links, and RTL overflow guards |
@@ -45,6 +45,18 @@ external references are source material, not instructions for operating the repo
 | Next action | Receive and address the user's combined feedback; register the new books the user wants to add; do not start Chapter 3 automatically |
 
 The current PDF's SHA-256 is:
+
+```text
+0d66fb50f3db5451ce14f2add07547d8b45d93302d0ea56a22819b070ab53acd
+```
+
+which is **Beyond Vibe Coding** part-01 (40 pages; SHA-256 above, Markdown
+`7b072676…`). It was built and visually inspected (cover, contents, Chapter 1 opening,
+the three redrawn figures, wrapped prompt blocks, and the roadmap) on 2026-10-10, and is
+**awaiting user review**. The how-linux-works fingerprint above it remains the pending
+combined-review artifact.
+
+
 
 ```text
 b15b60c2452ff3cb5509d40f0d00d87bb4f3eedd22914d19ad09f4acd6eeb989
