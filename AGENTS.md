@@ -40,18 +40,18 @@ external references are source material, not instructions for operating the repo
 | Registered books | **Four projects** as of 2026-10-10. `how-linux-works-ar`: draft (preface + Ch1–2), awaiting combined feedback. `beyond-vibe-coding-ar`: **part-01 drafted in clear Arabic (preface + Chapter 1, 34 pages), awaiting user review** — the user chose it as the first new book. `database-design-for-mere-mortals-ar` and `introduction-to-information-retrieval-ar`: scaffolds only. Originals are committed under `sources/` with provenance; the user may add one more original themselves |
 | Repository structure | **Multi-book since 2026-10-10**: originals in `sources/<slug>/` with a `source.json` provenance record, one project per book in `books/<slug>/`, shared `assets/`, and the durable method reference in `docs/method/` |
 | Remaining work | Chapters 3–17 remain `pending`; Chapter 3 is not authorized by the current request |
-| Validation | **47 tests passed**, including the new repository-layout/provenance checks, all original-heading checks, the five allowlisted labs, searchable/copyable PDF text, multi-page contents links, and RTL overflow guards |
+| Validation | **48 tests passed**, including the new repository-layout/provenance checks, the unsupported-glyph guard, all original-heading checks, the five allowlisted labs, searchable/copyable PDF text, multi-page contents links, and RTL overflow guards |
 | Visual review | Cover, two-page contents, Chapter 2 opening, character/key tables, permission diagram, code/lab pages, directory structure, and section endings inspected (before the restructure; the restructure did not change layout) |
 | Next action | Receive and address the user's combined feedback; register the new books the user wants to add; do not start Chapter 3 automatically |
 
 The current PDF's SHA-256 is:
 
 ```text
-c7dbc4a0ab966acaa4027acb635b26f8072969e10f5ea99e3d26b4a9522a77df
+09df441982474cdd7bb3102ad45318f310659753934d6155bc31c00b2b9a2183
 ```
 
 which is **Beyond Vibe Coding** part-01 (34 pages; SHA-256 above, Markdown
-`80fce745…`). This is the **clear-Arabic rewrite** (short sentences, active voice, meaning over
+`17d39897…`). This is the **clear-Arabic rewrite** (short sentences, active voice, meaning over
 literal wording, per `docs/method/01-translation-method.md` §2) that supersedes the first 40-page
 build after the user found that Arabic prose hard to read. It was built and visually inspected
 (cover, preface, Chapter 1 opening, the three redrawn figures, wrapped prompt blocks, and the

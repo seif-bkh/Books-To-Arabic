@@ -79,6 +79,18 @@ class ChapterOneSourceTests(unittest.TestCase):
         for language, _ in book.FENCED_CODE.findall(self.text):
             self.assertIn(language, {"text"}, "Chapter 1 should carry prompts as text only")
 
+    def test_no_unsupported_glyphs_in_arabic_files(self):
+        # Guards against the tofu/stray-glyph incidents (Greek, arrows, box-drawing, CJK, Cyrillic).
+        preface = next(d for d in self.data["documents"] if d["id"] == "preface")
+        files = [PROJECT.dir / preface["file"], PROJECT.dir / self.spec["file"]]
+        forbidden = [(0x0370, 0x03FF), (0x2190, 0x21FF), (0x2500, 0x257F),
+                     (0x25A0, 0x25FF), (0x4E00, 0x9FFF), (0x0400, 0x04FF)]
+        for path in files:
+            text = path.read_text(encoding="utf-8")
+            bad = sorted({f"U+{ord(c):04X}" for c in text
+                          if any(lo <= ord(c) <= hi for lo, hi in forbidden)})
+            self.assertEqual(bad, [], f"{path.name} has unsupported glyphs: {bad}")
+
 
 if __name__ == "__main__":
     unittest.main()
