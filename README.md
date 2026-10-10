@@ -16,7 +16,7 @@
 | الكتاب | الأصل | الحالة | أحدث دفعة |
 | --- | --- | --- | --- |
 | [كيف يعمل لينكس](books/how-linux-works-ar/README.md) | *How Linux Works*, 2nd ed. — Brian Ward | مسودة: المقدمة والفصلان 1–2 من 17 | [PDF · 84 صفحة](books/how-linux-works-ar/editions/how-linux-works-ar-part-02.pdf) |
-| [ما بعد «فايب كودينغ»](books/beyond-vibe-coding-ar/README.md) | *Beyond Vibe Coding* — Addy Osmani, O'Reilly 2025 | مسودة: المقدمة والفصل 1 من 11 | [PDF · 40 صفحة](books/beyond-vibe-coding-ar/editions/beyond-vibe-coding-ar-part-01.pdf) |
+| [ما بعد «فايب كودينغ»](books/beyond-vibe-coding-ar/README.md) | *Beyond Vibe Coding* — Addy Osmani, O'Reilly 2025 | مسودة: المقدمة والفصل 1 من 11 | [PDF · 34 صفحة](books/beyond-vibe-coding-ar/editions/beyond-vibe-coding-ar-part-01.pdf) |
 | [تصميم قواعد البيانات لغير المتخصصين](books/database-design-for-mere-mortals-ar/README.md) | *Database Design for Mere Mortals*, 4th/25th anniv. — Hernandez | مشروع مُسجّل: خريطة الطريق تُملأ من الأصل | — |
 | [مقدمة في استرجاع المعلومات](books/introduction-to-information-retrieval-ar/README.md) | *Introduction to Information Retrieval* — Manning et al., CUP | مشروع مُسجّل: خريطة الطريق تُملأ من الأصل | — |
 
