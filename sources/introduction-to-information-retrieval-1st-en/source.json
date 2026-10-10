@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "slug": "introduction-to-information-retrieval-1st-en",
+  "title": "Introduction to Information Retrieval",
+  "title_ar": "مقدمة في استرجاع المعلومات",
+  "author": "Christopher D. Manning, Prabhakar Raghavan, and Hinrich Schütze",
+  "author_ar": "كريستوفر مانينغ وبرابهكار راغافان وهينريش شوتزه",
+  "publisher": "Cambridge University Press",
+  "edition": 1,
+  "year": 2009,
+  "language": "en",
+  "file": "intro_to_ir.pdf",
+  "format": "pdf",
+  "pages": 581,
+  "sha256": "ab67ad67d89309a3d03de219173cfdea471e856a5083c83e49b11be8c01581ea",
+  "page_numbering": "1-based physical PDF pages of the author-hosted online edition. Verify against heading positions in the text before citing a page.",
+  "url": "https://nlp.stanford.edu/IR-book/",
+  "rights": {
+    "status": "all-rights-reserved",
+    "statement": "© 2009 Cambridge University Press. The authors host this online edition for personal use; the file itself states 'DRAFT! DO NOT DISTRIBUTE WITHOUT PRIOR PERMISSION'. Republishing it in this repository exceeds that permission.",
+    "notes": "Online edition printed 2009-04-01. FLAG (2026-10-10): this original explicitly says do-not-distribute; if the user wants to respect that, switch this source to metadata-only (keep source.json, drop the file) or obtain permission. Committed for now per the user's commit-as-is decision."
+  },
+  "used_by": [
+    "books/introduction-to-information-retrieval-ar"
+  ]
+}

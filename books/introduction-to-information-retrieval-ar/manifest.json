@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "project": {
+    "slug": "introduction-to-information-retrieval-ar",
+    "language": "ar",
+    "kind": "adaptation"
+  },
+  "edition": {
+    "slug": "introduction-to-information-retrieval-ar-part-01",
+    "title": "مقدمة في استرجاع المعلومات",
+    "subtitle": "إعداد عربي تعليمي",
+    "label": "الدفعة الأولى",
+    "date": "2026-10-10",
+    "date_ar": "10 أكتوبر 2026",
+    "status": "partial-draft",
+    "scope_note": "مسودة أولى. لم يبدأ إعداد الفصول بعد؛ املأ خريطة الطريق من فهرس الأصل قبل الكتابة.",
+    "kicker": "إعداد عربي تعليمي",
+    "cover_title_lines": [
+      "مقدمة",
+      "في استرجاع المعلومات"
+    ],
+    "cover_lines": [
+      "مسودة قيد الإعداد"
+    ],
+    "cover_credit": "استنادًا إلى كتاب",
+    "cover_scope": "مسودة أولى",
+    "cover_disclaimer": "مسودة تعليمية جزئية، وليست ترجمة حرفية أو رسمية.",
+    "pending_note": "لم يُعد أي فصل بعد.",
+    "attribution_note": "إعداد تعليمي مستند إلى Introduction to Information Retrieval، تأليف Christopher D. Manning, Prabhakar Raghavan, and Hinrich Schütze، نشر Cambridge University Press. ليس ترجمة حرفية أو رسمية.",
+    "pdf_partial_label": "إعداد تعليمي جزئي",
+    "pdf_author": "Arabic educational adaptation based on Christopher D. Manning, Prabhakar Raghavan, and Hinrich Schütze's book",
+    "pdf_keywords": [
+      "Arabic",
+      "partial adaptation"
+    ]
+  },
+  "source": {
+    "dir": "sources/introduction-to-information-retrieval-1st-en",
+    "file": "intro_to_ir.pdf",
+    "title": "Introduction to Information Retrieval",
+    "title_ar": "مقدمة في استرجاع المعلومات",
+    "author": "Christopher D. Manning, Prabhakar Raghavan, and Hinrich Schütze",
+    "author_ar": "كريستوفر مانينغ وبرابهكار راغافان وهينريش شوتزه",
+    "publisher": "Cambridge University Press",
+    "edition": 1,
+    "language": "en",
+    "cover_lines": [
+      "Introduction to Information Retrieval",
+      "Cambridge University Press"
+    ],
+    "pages": 581,
+    "sha256": "ab67ad67d89309a3d03de219173cfdea471e856a5083c83e49b11be8c01581ea",
+    "page_numbering": "1-based physical PDF pages of the author-hosted online edition. Verify against heading positions in the text before citing a page."
+  },
+  "roadmap": {
+    "extra_scope": "إضافة إلى المقدمة العربية",
+    "notes": [],
+    "review_gate": "انتظار ملاحظات المستخدم على الدفعة الحالية؛ "
+  },
+  "documents": [],
+  "chapters": [],
+  "other_source_material": [],
+  "archived_editions": []
+}

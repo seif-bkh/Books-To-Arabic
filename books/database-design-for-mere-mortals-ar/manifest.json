@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "project": {
+    "slug": "database-design-for-mere-mortals-ar",
+    "language": "ar",
+    "kind": "adaptation"
+  },
+  "edition": {
+    "slug": "database-design-for-mere-mortals-ar-part-01",
+    "title": "تصميم قواعد البيانات لغير المتخصصين",
+    "subtitle": "دليل عملي لتصميم قواعد البيانات العلائقية",
+    "label": "الدفعة الأولى",
+    "date": "2026-10-10",
+    "date_ar": "10 أكتوبر 2026",
+    "status": "partial-draft",
+    "scope_note": "مسودة أولى. لم يبدأ إعداد الفصول بعد؛ املأ خريطة الطريق من فهرس الأصل قبل الكتابة.",
+    "kicker": "إعداد عربي تعليمي",
+    "cover_title_lines": [
+      "تصميم",
+      "قواعد البيانات لغير المتخصصين"
+    ],
+    "cover_lines": [
+      "مسودة قيد الإعداد"
+    ],
+    "cover_credit": "استنادًا إلى كتاب",
+    "cover_scope": "مسودة أولى",
+    "cover_disclaimer": "مسودة تعليمية جزئية، وليست ترجمة حرفية أو رسمية.",
+    "pending_note": "لم يُعد أي فصل بعد.",
+    "attribution_note": "إعداد تعليمي مستند إلى Database Design for Mere Mortals: A Hands-On Guide to Relational Database Design، تأليف Michael J. Hernandez، نشر Addison-Wesley. ليس ترجمة حرفية أو رسمية.",
+    "pdf_partial_label": "إعداد تعليمي جزئي",
+    "pdf_author": "Arabic educational adaptation based on Michael J. Hernandez's book",
+    "pdf_keywords": [
+      "Arabic",
+      "partial adaptation"
+    ]
+  },
+  "source": {
+    "dir": "sources/database-design-for-mere-mortals-4th-en",
+    "file": "Database_Design_For_Mere_Mortals.pdf",
+    "title": "Database Design for Mere Mortals: A Hands-On Guide to Relational Database Design",
+    "title_ar": "تصميم قواعد البيانات لغير المتخصصين: دليل عملي لتصميم قواعد البيانات العلائقية",
+    "author": "Michael J. Hernandez",
+    "author_ar": "مايكل ج. هرنانديز",
+    "publisher": "Addison-Wesley",
+    "edition": 4,
+    "language": "en",
+    "cover_lines": [
+      "Database Design for Mere Mortals: A Hands-On Guide to Relational Database Design",
+      "Addison-Wesley"
+    ],
+    "pages": 485,
+    "sha256": "59bb8437c147527987e6b524d8d611555a21f86118e88b26d1ccff95e74fa3e0",
+    "page_numbering": "1-based physical PDF pages. Verify against heading positions in the text before citing a page; embedded bookmarks can be off by one."
+  },
+  "roadmap": {
+    "extra_scope": "إضافة إلى المقدمة العربية",
+    "notes": [],
+    "review_gate": "انتظار ملاحظات المستخدم على الدفعة الحالية؛ "
+  },
+  "documents": [],
+  "chapters": [],
+  "other_source_material": [],
+  "archived_editions": []
+}

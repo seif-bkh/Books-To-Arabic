@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "slug": "database-design-for-mere-mortals-4th-en",
+  "title": "Database Design for Mere Mortals: A Hands-On Guide to Relational Database Design",
+  "title_ar": "تصميم قواعد البيانات لغير المتخصصين: دليل عملي لتصميم قواعد البيانات العلائقية",
+  "author": "Michael J. Hernandez",
+  "author_ar": "مايكل ج. هرنانديز",
+  "publisher": "Addison-Wesley",
+  "edition": 4,
+  "edition_note": "25th Anniversary Edition (Fourth Edition)",
+  "year": 2023,
+  "language": "en",
+  "file": "Database_Design_For_Mere_Mortals.pdf",
+  "format": "pdf",
+  "pages": 485,
+  "sha256": "59bb8437c147527987e6b524d8d611555a21f86118e88b26d1ccff95e74fa3e0",
+  "page_numbering": "1-based physical PDF pages. Verify against heading positions in the text before citing a page; embedded bookmarks can be off by one.",
+  "rights": {
+    "status": "all-rights-reserved",
+    "statement": "Copyright Michael J. Hernandez / Addison-Wesley (Pearson). Presence in this repository grants no translation, republication, or distribution rights.",
+    "notes": "25th Anniversary / Fourth Edition; PDF creation date 2022-12-22. Committed per the user's 2026-10-10 decision to keep originals in-repo."
+  },
+  "used_by": [
+    "books/database-design-for-mere-mortals-ar"
+  ]
+}

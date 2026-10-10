@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "project": {
+    "slug": "beyond-vibe-coding-ar",
+    "language": "ar",
+    "kind": "adaptation"
+  },
+  "edition": {
+    "slug": "beyond-vibe-coding-ar-part-01",
+    "title": "ما بعد «فايب كودينغ»",
+    "subtitle": "من مبرمج إلى مطوّر عصر الذكاء الاصطناعي",
+    "label": "الدفعة الأولى",
+    "date": "2026-10-10",
+    "date_ar": "10 أكتوبر 2026",
+    "status": "partial-draft",
+    "scope_note": "مسودة أولى. لم يبدأ إعداد الفصول بعد؛ املأ خريطة الطريق من فهرس الأصل قبل الكتابة.",
+    "kicker": "إعداد عربي تعليمي",
+    "cover_title_lines": [
+      "ما",
+      "بعد «فايب كودينغ»"
+    ],
+    "cover_lines": [
+      "مسودة قيد الإعداد"
+    ],
+    "cover_credit": "استنادًا إلى كتاب",
+    "cover_scope": "مسودة أولى",
+    "cover_disclaimer": "مسودة تعليمية جزئية، وليست ترجمة حرفية أو رسمية.",
+    "pending_note": "لم يُعد أي فصل بعد.",
+    "attribution_note": "إعداد تعليمي مستند إلى Beyond Vibe Coding: From Coder to AI-Era Developer، تأليف Addy Osmani، نشر O'Reilly Media. ليس ترجمة حرفية أو رسمية.",
+    "pdf_partial_label": "إعداد تعليمي جزئي",
+    "pdf_author": "Arabic educational adaptation based on Addy Osmani's book",
+    "pdf_keywords": [
+      "Arabic",
+      "partial adaptation"
+    ]
+  },
+  "source": {
+    "dir": "sources/beyond-vibe-coding-1st-en",
+    "file": "BeyondVibeCoding.pdf",
+    "title": "Beyond Vibe Coding: From Coder to AI-Era Developer",
+    "title_ar": "ما بعد «فايب كودينغ»: من مبرمج إلى مطوّر عصر الذكاء الاصطناعي",
+    "author": "Addy Osmani",
+    "author_ar": "آدي عثماني",
+    "publisher": "O'Reilly Media",
+    "edition": 1,
+    "language": "en",
+    "cover_lines": [
+      "Beyond Vibe Coding: From Coder to AI-Era Developer",
+      "O'Reilly Media"
+    ],
+    "pages": 255,
+    "sha256": "fe15d56a45c4a4d4906b0968447e624655c165a3329d38f24fb06d6b950cf938",
+    "page_numbering": "1-based physical PDF pages. Verify against heading positions in the text before citing a page; embedded bookmarks can be off by one."
+  },
+  "roadmap": {
+    "extra_scope": "إضافة إلى المقدمة العربية",
+    "notes": [],
+    "review_gate": "انتظار ملاحظات المستخدم على الدفعة الحالية؛ "
+  },
+  "documents": [],
+  "chapters": [],
+  "other_source_material": [],
+  "archived_editions": []
+}

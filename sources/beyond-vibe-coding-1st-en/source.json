@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "slug": "beyond-vibe-coding-1st-en",
+  "title": "Beyond Vibe Coding: From Coder to AI-Era Developer",
+  "title_ar": "ما بعد «فايب كودينغ»: من مبرمج إلى مطوّر عصر الذكاء الاصطناعي",
+  "author": "Addy Osmani",
+  "author_ar": "آدي عثماني",
+  "publisher": "O'Reilly Media",
+  "edition": 1,
+  "year": 2025,
+  "language": "en",
+  "isbn": "979-8-341-63475-6",
+  "file": "BeyondVibeCoding.pdf",
+  "format": "pdf",
+  "pages": 255,
+  "sha256": "fe15d56a45c4a4d4906b0968447e624655c165a3329d38f24fb06d6b950cf938",
+  "page_numbering": "1-based physical PDF pages. Verify against heading positions in the text before citing a page; embedded bookmarks can be off by one.",
+  "rights": {
+    "status": "all-rights-reserved",
+    "statement": "Copyright © 2025 Addy Osmani. All rights reserved. O'Reilly Media. Presence in this repository grants no translation, republication, or distribution rights.",
+    "notes": "First Edition, August 2025 (first release 2025-08-18). Committed per the user's 2026-10-10 decision to keep originals in-repo."
+  },
+  "used_by": [
+    "books/beyond-vibe-coding-ar"
+  ]
+}
