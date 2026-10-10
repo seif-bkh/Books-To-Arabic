@@ -1,5 +1,10 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "project": {
+    "slug": "how-linux-works-ar",
+    "language": "ar",
+    "kind": "adaptation"
+  },
   "edition": {
     "slug": "how-linux-works-ar-part-02",
     "title": "كيف يعمل لينكس",
@@ -9,28 +14,60 @@
     "date_ar": "7 سبتمبر 2026",
     "status": "partial-draft",
     "scope_note": "نسخة تراكمية للمقدمة والفصلين الأول والثاني، مع معجم ومختبرات وإجابات. ليست نسخة كاملة؛ الفصول من الثالث إلى السابع عشر لم تُعد بعد.",
+    "kicker": "إعداد عربي تعليمي",
+    "cover_title_lines": [
+      "كيف يعمل",
+      "لينكس"
+    ],
     "cover_lines": [
       "من الصورة العامة",
       "إلى سطر الأوامر"
     ],
+    "cover_credit": "استنادًا إلى كتاب",
     "cover_scope": "مقدمة · الفصلان الأول والثاني · معجم · مختبرات",
-    "pending_note": "الفصول من الثالث إلى السابع عشر لم تُعد بعد."
+    "cover_disclaimer": "مسودة تعليمية جزئية، وليست ترجمة حرفية أو رسمية.",
+    "pending_note": "الفصول من الثالث إلى السابع عشر لم تُعد بعد.",
+    "attribution_note": "إعداد تعليمي مستند إلى الطبعة الثانية من كتاب Brian Ward، نشر No Starch Press. ليس ترجمة حرفية أو رسمية. راجع حدود التغطية وحقوق الأصل في ملاحظات الإعداد.",
+    "pdf_partial_label": "إعداد تعليمي جزئي",
+    "pdf_author": "Arabic educational adaptation based on Brian Ward's book",
+    "pdf_keywords": [
+      "Arabic",
+      "Linux",
+      "beginner",
+      "partial adaptation"
+    ]
   },
   "source": {
+    "dir": "sources/how-linux-works-2nd-en",
     "file": "HowLinuxWorks.pdf",
     "title": "How Linux Works: What Every Superuser Should Know",
+    "title_ar": "كيف يعمل لينكس: ما يجب أن يعرفه كل مستخدم متميز",
     "author": "Brian Ward",
+    "author_ar": "برايان وارد",
     "publisher": "No Starch Press",
     "edition": 2,
-    "pdf_pages": 338,
+    "language": "en",
+    "cover_lines": [
+      "How Linux Works",
+      "What Every Superuser Should Know",
+      "Second edition · No Starch Press"
+    ],
+    "pages": 338,
     "sha256": "de56a39307fe5d8d9b5283d884ee8418241b283556fbf5ae9b13dc2360d065fa",
     "page_numbering": "1-based physical PDF pages, verified against the text, not the PDF bookmarks. Chapter 12 ends and chapter 13 begins on page 241."
+  },
+  "roadmap": {
+    "extra_scope": "إضافة إلى المقدمة العربية",
+    "notes": [
+      "تبدأ بعض الفصول في الصفحة نفسها التي ينتهي فيها الفصل السابق؛ مثل الفصلين 12 و13 في الصفحة 241. لذلك قد تتداخل حدود الصفحات دون تداخل المحتوى."
+    ],
+    "review_gate": "انتظار ملاحظات المستخدم على الدفعة الحالية؛ "
   },
   "documents": [
     {
       "id": "preface",
       "title": "مقدمة الطبعة العربية التعليمية",
-      "file": "book/ar/00-preface.md",
+      "file": "ar/00-preface.md",
       "kind": "adaptation",
       "source_pages": [
         4,
@@ -40,7 +77,7 @@
     {
       "id": "chapter-1",
       "title": "الفصل الأول: الصورة العامة",
-      "file": "book/ar/01-the-big-picture.md",
+      "file": "ar/01-the-big-picture.md",
       "kind": "adaptation",
       "source_pages": [
         8,
@@ -51,25 +88,25 @@
     {
       "id": "chapter-2",
       "title": "الفصل الثاني: الأوامر الأساسية وبنية الأدلة",
-      "file": "book/ar/02-basic-commands.md",
+      "file": "ar/02-basic-commands.md",
       "kind": "adaptation",
       "source_pages": [
         15,
         41
       ],
       "toc_depth": 2,
-      "coverage_file": "book/coverage/chapter-02.json"
+      "coverage_file": "coverage/chapter-02.json"
     },
     {
       "id": "glossary",
       "title": "معجم الدفعة الثانية",
-      "file": "book/ar/glossary.md",
+      "file": "ar/glossary.md",
       "kind": "editorial"
     },
     {
       "id": "editorial-notes",
       "title": "ملاحظات الإعداد والمراجع",
-      "file": "book/ar/references.md",
+      "file": "ar/references.md",
       "kind": "editorial"
     }
   ],

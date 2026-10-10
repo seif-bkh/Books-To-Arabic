@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -19,6 +20,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from scripts import build_book as book  # noqa: E402
 
+SLUG = "how-linux-works-ar"
+PROJECT = book.Project.resolve(SLUG)
+EDITIONS = PROJECT.editions_dir
+
 
 SAFE_EXAMPLES = {
     "ls /",
@@ -35,16 +40,60 @@ SAFE_EXAMPLES = {
 class SourceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.manifest = book.load_manifest()
-        cls.documents = book.prepare_documents(cls.manifest)
+        cls.manifest = book.load_manifest(PROJECT)
+        cls.documents = book.prepare_documents(cls.manifest, PROJECT)
         cls.markup = book.compose_html(cls.manifest, cls.documents)
 
     def test_original_pdf_fingerprint_and_page_count(self):
-        book.verify_source(self.manifest)
+        book.verify_source(self.manifest, PROJECT)
+
+    def test_manifest_cannot_disagree_with_the_source_record(self):
         wrong = copy.deepcopy(self.manifest)
         wrong["source"]["sha256"] = "0" * 64
-        with self.assertRaisesRegex(ValueError, "fingerprint"):
-            book.verify_source(wrong)
+        with self.assertRaisesRegex(ValueError, "source.json and manifest disagree"):
+            book.verify_source(wrong, PROJECT)
+        missing = copy.deepcopy(self.manifest)
+        missing["source"]["pages"] = self.manifest["source"]["pages"] - 1
+        with self.assertRaisesRegex(ValueError, "disagree on 'pages'"):
+            book.verify_source(missing, PROJECT)
+
+    def test_changed_original_and_missing_record_are_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_dir = root / "sources" / "fixture"
+            source_dir.mkdir(parents=True)
+            pdf = source_dir / "fixture.pdf"
+            with pymupdf.open() as document:
+                document.new_page()
+                document.save(pdf)
+            digest = hashlib.sha256(pdf.read_bytes()).hexdigest()
+            record = {"file": "fixture.pdf", "sha256": digest, "pages": 1,
+                      "title": self.manifest["source"]["title"],
+                      "author": self.manifest["source"]["author"]}
+            data = copy.deepcopy(self.manifest)
+            data["source"].update(dir="sources/fixture", file="fixture.pdf",
+                                  sha256=digest, pages=1)
+            (source_dir / "source.json").write_text(json.dumps(record), encoding="utf-8")
+            project = book.Project(slug=SLUG, dir=root, root=root)
+            book.verify_source(data, project)
+
+            record["sha256"] = "0" * 64
+            (source_dir / "source.json").write_text(json.dumps(record), encoding="utf-8")
+            data["source"]["sha256"] = "0" * 64
+            with self.assertRaisesRegex(ValueError, "documented source fingerprint"):
+                book.verify_source(data, project)
+
+            record["pages"] = 2
+            record["sha256"] = digest
+            data["source"]["sha256"] = digest
+            data["source"]["pages"] = 2
+            (source_dir / "source.json").write_text(json.dumps(record), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "page count differs"):
+                book.verify_source(data, project)
+
+            (source_dir / "source.json").unlink()
+            with self.assertRaisesRegex(ValueError, "Missing provenance record"):
+                book.verify_source(data, project)
 
     def test_explicit_partial_scope(self):
         self.assertEqual(self.manifest["edition"]["status"], "partial-draft")
@@ -91,34 +140,37 @@ class SourceTests(unittest.TestCase):
             book.check_html(self.markup.replace('<pre dir="ltr">', "<pre>", 1))
 
     def test_fonts_are_bundled_with_licenses(self):
+        fonts = PROJECT.fonts_dir
+        self.assertEqual(fonts, ROOT / "assets" / "fonts")
         for filename in ("Amiri-Regular.ttf", "Amiri-Bold.ttf", "FiraMono-Regular.ttf"):
-            data = (book.FONTS / filename).read_bytes()
+            data = (fonts / filename).read_bytes()
             self.assertEqual(data[:4], b"\x00\x01\x00\x00")
         for filename in ("Amiri-OFL.txt", "FiraMono-OFL.txt"):
-            self.assertIn("SIL OPEN FONT LICENSE", (book.FONTS / filename).read_text())
-        embedded = book.inline_styles(self.markup)
+            self.assertIn("SIL OPEN FONT LICENSE", (fonts / filename).read_text())
+        embedded = book.inline_styles(self.markup, self.manifest, PROJECT)
         self.assertEqual(embedded.count("data:font/ttf;base64,"), 3)
         self.assertNotRegex(embedded, r"url\([\"']?https?://")
 
     def test_combined_markdown_is_current(self):
-        output = ROOT / "editions" / (self.manifest["edition"]["slug"] + ".md")
+        output = EDITIONS / (self.manifest["edition"]["slug"] + ".md")
         self.assertEqual(output.read_text(), book.combined_markdown(self.manifest, self.documents))
 
     def test_manifest_cannot_claim_an_unwritten_chapter(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            shutil.copytree(ROOT / "book/ar", root / "book/ar")
+            shutil.copytree(PROJECT.dir / "ar", root / "ar")
             data = copy.deepcopy(self.manifest)
-            shutil.copytree(ROOT / "book/coverage", root / "book/coverage")
+            shutil.copytree(PROJECT.dir / "coverage", root / "coverage")
             data["chapters"][2]["status"] = "draft"
-            (root / "book/manifest.json").write_text(json.dumps(data, ensure_ascii=False))
+            (root / "manifest.json").write_text(json.dumps(data, ensure_ascii=False))
             with self.assertRaisesRegex(ValueError, "real source document"):
-                book.load_manifest(root)
+                book.load_manifest(book.Project(slug=SLUG, dir=root, root=ROOT))
 
     def test_check_runs_outside_repository_working_directory(self):
         with tempfile.TemporaryDirectory() as directory:
             result = subprocess.run(
-                [sys.executable, str(ROOT / "scripts/build_book.py"), "--check", "--verify-source"],
+                [sys.executable, str(ROOT / "scripts/build_book.py"),
+                 "--book", SLUG, "--check", "--verify-source"],
                 cwd=directory, capture_output=True, text=True, timeout=30,
             )
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -152,11 +204,11 @@ class PDFTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.scratch = tempfile.TemporaryDirectory(prefix="arabic-book-test-")
-        cls.result = book.build(Path(cls.scratch.name))
+        cls.result = book.build(Path(cls.scratch.name), PROJECT)
         cls.pdf = pymupdf.open(cls.result["pdf"])
         cls.text = "\n".join(page.get_text() for page in cls.pdf)
-        cls.data = book.load_manifest()
-        cls.documents = book.prepare_documents(cls.data)
+        cls.data = book.load_manifest(PROJECT)
+        cls.documents = book.prepare_documents(cls.data, PROJECT)
 
     @classmethod
     def tearDownClass(cls):
@@ -221,7 +273,7 @@ class PDFTests(unittest.TestCase):
             self.assertTrue(self.pdf.extract_font(xref)[3], f"Unembedded font xref {xref}")
 
     def test_published_pdf_matches_rebuilt_content(self):
-        release = ROOT / "editions" / self.result["pdf"].name
+        release = EDITIONS / self.result["pdf"].name
         with pymupdf.open(release) as published:
             self.assertEqual(len(published), len(self.pdf))
             self.assertEqual(published.get_toc(), self.pdf.get_toc())
@@ -230,7 +282,8 @@ class PDFTests(unittest.TestCase):
     def test_rtl_overflow_regression_is_detected(self):
         # Without the LTR mechanical column container, Paged.js can produce a
         # plausible seven-page PDF while hiding most of each Arabic chapter.
-        markup = book.inline_styles(book.compose_html(self.data, self.documents))
+        markup = book.inline_styles(book.compose_html(self.data, self.documents),
+                                    self.data, PROJECT)
         markup = markup.replace("</head>", '<style>.pagedjs_page_content { direction: rtl !important; }</style></head>')
         scratch = Path(self.scratch.name)
         source = scratch / "broken-rtl.html"

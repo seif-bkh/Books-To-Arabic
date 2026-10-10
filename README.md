@@ -1,116 +1,113 @@
 <div dir="rtl" lang="ar">
 
-# كيف يعمل لينكس — إعداد عربي تعليمي
+# كتب مُعدّة إلى العربية
 
-إعداد للمبتدئين بالعربية الفصحى، مستند إلى **How Linux Works: What Every Superuser Should Know**، الطبعة الثانية، تأليف **Brian Ward** ونشر **No Starch Press**.
+مستودع علمي لإعداد كتب تقنية باللغة العربية الفصحى: لكل كتاب **مشروع مستقل** بمصادره
+وسجلات تغطيته ودفعاته المسلّمة، ولكل أصل **سجل مصدر** ببصمته وحالته الحقوقية. الطريقة
+والدروس محفوظة في مرجع قار واحد حتى لا يعيد أحد تحقيق مسألة حُلّت.
 
-> **الحالة: الدفعة الثانية، مسودة تراكمية للمراجعة.** المتاح هو المقدمة والفصلان الأول والثاني، لا الكتاب كله. الفصول من الثالث إلى السابع عشر لم تُعد بعد. أذن المستخدم بإعداد الفصل الثاني وسيراجع المقدمة والفصلين معًا؛ الإذن بالمتابعة لا يعني اعتماد النص السابق نهائيًا.
+> **تنبيه حقوقي:** وجود أصل في هذا المستودع لا يمنح إذنًا بترجمته أو إعادة نشره أو
+> توزيعه؛ الحقوق تبقى لأصحابها. الإعدادات العربية مسودات تعليمية جزئية، لا ترجمات
+> رسمية ولا كتبًا كاملة. راجع
+> [سياسة الأصول والحقوق](docs/method/05-source-and-rights.md).
 
-## اقرأ الدفعة الثانية
+## الكتب
 
-- **[PDF التراكمي — 84 صفحة](editions/how-linux-works-ar-part-02.pdf)** — المقدمة والفصلان الأول والثاني، مع معجم ومختبرات ومراجع. **يبدأ الفصل الثاني في الصفحة 26**؛ الفهرس القابل للنقر والعلامات المرجعية يتيحان الانتقال إليه مباشرة.
-- **[Markdown المجمّع القابل للتحرير](editions/how-linux-works-ar-part-02.md)** — المادة نفسها بصيغة نصية.
-- **[مصدر الفصل الثاني وحده](book/ar/02-basic-commands.md)** — مناسب للمراجعة المركزة والتعليق على الفقرات.
+| الكتاب | الأصل | الحالة | أحدث دفعة |
+| --- | --- | --- | --- |
+| [كيف يعمل لينكس](books/how-linux-works-ar/README.md) | *How Linux Works*, 2nd ed. — Brian Ward | مسودة: المقدمة والفصلان 1–2 من 17 | [PDF · 84 صفحة](books/how-linux-works-ar/editions/how-linux-works-ar-part-02.pdf) |
 
-### ما الذي أُعدّ؟
+لكل كتاب بطاقة مشروع في `books/<slug>/README.md` تسجّل حالته ودفعاته وخطوته التالية،
+وبيان آلي في `books/<slug>/manifest.json` هو المرجع الوحيد لنطاقه وحالة فصوله.
 
-| المادة | الملف القابل للتحرير | نطاق المصدر |
-| --- | --- | --- |
-| المقدمة التعليمية | [00-preface.md](book/ar/00-preface.md) | مقدمة الأصل، صفحات الملف من 4 إلى 6 |
-| الفصل الأول: الصورة العامة | [01-the-big-picture.md](book/ar/01-the-big-picture.md) | جميع الأقسام من `1.1` إلى `1.6`، صفحات الملف من 8 إلى 14 |
-| الفصل الثاني: الأوامر الأساسية وبنية الأدلة | [02-basic-commands.md](book/ar/02-basic-commands.md) | الأقسام من `2.1` إلى `2.21` وأقسامها الفرعية، صفحات الملف من 15 إلى 41 |
-| المعجم الموسع | [glossary.md](book/ar/glossary.md) | مصطلحات الفصلين مع فروق تساعد على الفهم |
-| المراجع وملاحظات الإعداد | [references.md](book/ar/references.md) | إحالات المصدر، والتحديثات الموسومة، وحدود التغطية |
+**لا يوجد أي كتاب مكتمل هنا.** ذكر عنوان فصل في خريطة الطريق لا يعني إعداد محتواه.
 
-يحافظ الفصل الثاني على **63 عنوانًا مرقمًا، وأربعة جداول، وشكلين** من حيث موضوعاتها وترتيبها، مع إعادة صياغة تعليمية ورسوم عربية جديدة. ويضيف **خمس تجارب عملية واثني عشر سؤالًا مع إجابات**. تُفصل تحديثات `/bin/sh` والأنماط النقطية وكلمات المرور والإشارات ودمج `/usr` وسياسات `sudo` عن مادة الأصل. لا تُنفذ أوامر تغيير الحسابات أو تحرير `sudoers` في الاختبارات.
+## طريقة العمل — المرجع القار
 
-تعرض **[خريطة الإنجاز](editions/how-linux-works-ar-part-02.md#roadmap)** الفصول السبعة عشر وحالة كل منها. مصدرها [manifest.json](book/manifest.json)، ويقابل [سجل تغطية الفصل الثاني](book/coverage/chapter-02.json) العناوين بالصفحات الفعلية في الأصل. ذكر عنوان فصل منتظر لا يعني إعداد محتواه.
+ابدأ من هنا قبل أي عمل. هذه الملفات هي المرجع المعتمد للطريقة وللصعوبات وحلولها:
 
-### الدفعة الأولى محفوظة
+| الملف | المحتوى |
+| --- | --- |
+| [docs/method/README.md](docs/method/README.md) | فهرس المرجع والحدود بين ملفاته |
+| [docs/method/00-repo-layout.md](docs/method/00-repo-layout.md) | بنية المستودع وقواعد التسمية وإضافة كتاب |
+| [docs/method/01-translation-method.md](docs/method/01-translation-method.md) | خطوات الإعداد من الأصل إلى التسليم وبوابة الموافقة |
+| [docs/method/02-terminology-policy.md](docs/method/02-terminology-policy.md) | سياسة المصطلحات وما يبقى باللاتينية |
+| [docs/method/03-rtl-typesetting.md](docs/method/03-rtl-typesetting.md) | صعوبات الاتجاه العربي والتنضيد وحلولها |
+| [docs/method/04-build-and-validation.md](docs/method/04-build-and-validation.md) | أوامر البناء والفحص والاختبار |
+| [docs/method/05-source-and-rights.md](docs/method/05-source-and-rights.md) | البصمات، أرقام الصفحات، والحقوق |
+| [docs/method/06-lessons-log.md](docs/method/06-lessons-log.md) | سجل الدروس: كل مشكلة وقعت وحلّها ومكان فرضه |
 
-يبقى [PDF الدفعة الأولى — 32 صفحة](editions/how-linux-works-ar-part-01.pdf) و[Markdown المقابل](editions/how-linux-works-ar-part-01.md) دون تغيير. تحفظ بصماتهما في `archived_editions` داخل البيان، ويتوقف البناء إذا تغير أحدهما أو حاولت تسمية الدفعة الحالية باسم دفعة مؤرشفة.
+ويكملها:
 
-لم تُجر مراجعة تحريرية جديدة على محتوى المقدمة والفصل الأول في هذه الخطوة؛ حُدّثت فقط عبارات إتاحة الفصل الثاني في مصادرهما، وأضيفت المادة الجديدة للمراجعة المشتركة. تبقى النسخ التاريخية قابلة للمقارنة عبر Git.
+- [AGENTS.md](AGENTS.md) — عقد العمل مع المستخدم: بوابة الموافقة وحالة المراجعة الجارية.
+- [CONTRIBUTING.md](CONTRIBUTING.md) — دليل المساهم المختصر.
 
-## المصدر والحقوق
+## بنية المستودع
 
-يبقى الملف الأصلي `HowLinuxWorks.pdf` دون تعديل. يتألف من 338 صفحة؛ وتحيل أرقام الصفحات إلى ترتيب صفحات الملف نفسه، لا إلى فهرسه المرجعي المضمّن أو إلى ترقيم طبعة أخرى. يحفظ ملف البيان بصمة SHA-256 للتحقق من ثبات المصدر.
+```text
+docs/method/     المرجع القار للطريقة والدروس
+assets/          التنضيد والخطوط المشتركة (مع تراخيصها)
+sources/         الأصول بلغتها الأم + source.json لكل أصل — للقراءة فقط
+books/<slug>/    مشروع كتاب: manifest.json، ar/، coverage/، editions/
+scripts/         build_book.py (--book)، new_book.py، render_pdf.mjs
+tests/           فحوص البنية العامة + فحوص كل كتاب باسمه
+```
 
-تذكر صفحة حقوق الأصل الطبعة الثانية وحقوق عام 2015، ويتضمن الملف أيضًا بيانات نشر من عام 2014. هذه ليست طبعة حديثة من النص الإنجليزي. التوضيحات المضافة مفصولة عنه ومؤرخة بتاريخ **7 سبتمبر 2026**، مع روابط إلى التوثيق المستخدم.
+التفاصيل والقواعد في [docs/method/00-repo-layout.md](docs/method/00-repo-layout.md).
 
-تعود حقوق الكتاب الأصلي إلى أصحابها. لا يمنح وجود هذا الإعداد إذنًا بترجمة الكتاب أو إعادة نشره أو توزيعه؛ تحقّق من الحقوق اللازمة قبل نشره خارج نطاق العمل عليه. لا نفرض ترخيصًا حرًا شاملًا على مادة الأصل. تراخيص الخطوط المرفقة تخص الخطوط وحدها، وهي محفوظة في [مجلد الخطوط](book/assets/fonts/README.md).
+## إضافة كتاب جديد
 
-## إعادة بناء PDF وMarkdown
+```sh
+python scripts/new_book.py add-source --file ~/book.pdf --slug some-book-1st-en \
+    --title "Some Book" --author "A. Author" --publisher "Publisher" \
+    --edition 1 --year 2020 --language en --rights-status unresolved
 
-**المتطلبات:** Python من الإصدار 3.10 فأحدث، وNode.js من الإصدار 22.17 فأحدث، وnpm. اختُبر البناء على Linux x86-64 باستخدام Python 3.11 وNode.js 22. تُنزّل الاعتماديات في خطوة التثبيت فقط؛ البناء نفسه محلي، ولا يرسل النص إلى خدمة ترجمة أو إلى الإنترنت.
+python scripts/new_book.py add-book --slug some-book-ar --source some-book-1st-en \
+    --title-ar "بعض الكتاب" --author-ar "المؤلف"
+```
 
-من جذر المستودع:
+تُحسب بصمة الأصل وعدد صفحاته تلقائيًا، ويُنشأ المشروع بالهيكل القانوني. خريطة الطريق
+تبقى **فارغة عمدًا**: عناوين الفصول ونطاقات صفحاتها تُقرأ من الأصل ولا تُخمَّن.
+`tests/test_repository_layout.py` يفرض هذه البنية على كل الكتب.
 
-</div>
+## البناء والفحص
+
+**المتطلبات:** Python 3.10+ وNode.js 22.17+ وnpm. اختُبر على Linux x86-64 بـ Python 3.11
+وNode.js 22. البناء محلي ولا يرسل النص إلى أي خدمة ترجمة أو إلى الإنترنت.
 
 ```sh
 python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install -r requirements.txt
+.venv/bin/python -m pip install -r requirements.txt
 npm ci
-python scripts/build_book.py --check --verify-source
-python scripts/build_book.py
+
+python scripts/build_book.py --book how-linux-works-ar --check --verify-source
+python scripts/build_book.py --book how-linux-works-ar
 python -m unittest discover -s tests -v
 ```
 
-<div dir="rtl" lang="ar">
-
-إذا لم يتوفر إنشاء البيئات الافتراضية في توزيعتك، ثبّت حزمة Python المناسبة لبيئتك أولًا، مثل `python3-venv` على بعض توزيعات Debian ومشتقاتها.
-
-- يعيد البناء إنشاء الملفين داخل `editions/` من المصادر؛ **لا تعدّل النسخة المجمعة أو PDF يدويًا**.
-- لا تحتاج إلى LaTeX أو إلى تثبيت خطوط على مستوى النظام. خطوط Amiri وFira Mono مرفقة بتراخيصها.
-- تستخدم أداة الإخراج Chromium وPaged.js لتشكيل العربية وتوزيع الصفحات، ثم تضبط بيانات PDF وعلاماته المرجعية باستخدام PyMuPDF.
-- يتضمن اعتماد Chromium الملف التنفيذي لبيئات Linux x86-64، ويستخرج محليًا المكتبات اللازمة عند التشغيل. لا تُضاف هذه الملفات الكبيرة إلى Git.
-- على نظام أو معمارية أخرى، أو لاستخدام Chromium مثبت مسبقًا، عيّن مساره عبر `BOOK_CHROMIUM_PATH` إلى ملف Chrome/Chromium تنفيذي متوافق.
-- حزمة PyMuPDF لها ترخيصها الخاص (AGPL أو ترخيص تجاري من مزودها)؛ تراخيص الاعتماديات مستقلة عن حقوق الكتاب ومحتوى PDF.
-
-مثال لاستخدام متصفح محلي بدل النسخة المرفقة:
-
-</div>
-
-```sh
-BOOK_CHROMIUM_PATH="/path/to/chromium" python scripts/build_book.py
-```
-
-<div dir="rtl" lang="ar">
-
-لإنشاء مخرجات تجريبية دون استبدال الدفعة المنشورة:
-
-</div>
-
-```sh
-python scripts/build_book.py --output-dir build/preview
-```
-
-<div dir="rtl" lang="ar">
-
-يمكن أيضًا استخدام `npm run build` و`npm run check` و`npm test` بعد تفعيل البيئة الافتراضية. مجلد `build/` والبيئات المحلية والاعتماديات مستثناة من Git؛ أما مخرجات `editions/` فهي ملفات التسليم المقصودة.
-
-## ما الذي تتحقق منه الأدوات؟
-
-- وجود نص عربي فعلي لكل مادة متاحة، وتطابق العناوين والروابط وحالات الإنجاز مع البيان.
-- ثبات ملف المصدر والدفعة الأولى، ونطاقات الصفحات، وحفظ أقسام الفصلين والرسوم والجداول والأمثلة.
-- مطابقة عناوين الفصل الثاني الثلاثة والستين مع PDF المصدر، ورفض عنوان أُسقط أو تُرك بلا شرح عربي.
-- اتجاه كتل الأوامر وعدم وجود محارف اتجاه خفية في نصها.
-- بقاء محتوى الفقرات والقوائم والجداول بعد تقسيم الصفحات، وعدم اختفائه في أعمدة خارج الصفحة بسبب اتجاه العربية.
-- تطابق أرقام الفهرس والعلامات المرجعية مع الصفحات الفعلية، وإمكان البحث عن كلمات عربية، وبقاء أوامر الطرفية قابلة للنسخ من PDF.
-- فحص صياغة كتل الصدفة دون تنفيذها، وتنفيذ قائمة أمثلة آمنة محددة فقط. مختبرات الفصل الثاني لها بصمات مراجعة في `tests/chapter02_labs.json`، وتعمل في أدلة ومجموعات عمليات مؤقتة؛ لا تشغّل الاختبارات كل أمر جديد يضاف إلى الكتاب تلقائيًا.
-
-اجتازت هذه الدفعة **31 اختبارًا** في بيئة البناء. لا تعني هذه الفحوص مراجعة لغوية أو تقنية بشرية كاملة. ما زال النص **مسودة قابلة للمراجعة**.
+`scripts/build_book.py --list` يسرد المشاريع المتاحة. لا تحتاج LaTeX ولا خطوط نظام؛
+خطوط Amiri وFira Mono مرفقة في [assets/fonts](assets/fonts/README.md) بتراخيصها. على
+منصة أخرى عيّن `BOOK_CHROMIUM_PATH` إلى متصفح متوافق. التفاصيل في
+[docs/method/04-build-and-validation.md](docs/method/04-build-and-validation.md).
 
 ## متابعة الإعداد
 
-اقرأ أولًا **[عقد العمل ومرجع الجلسات](AGENTS.md)**، الذي يسجل خطة الإعداد التدريجي، وحالة موافقة المستخدم، والدروس المستفادة. **انتظر تأكيد المستخدم على PDF الدفعة الحالية قبل بدء الفصل التالي**؛ طلب الحفظ أو الدفع إلى Git لا يُعد موافقة على المحتوى.
-
-الخطوة الحالية هي **انتظار الملاحظات على المقدمة والفصلين الأول والثاني معًا** ومعالجة التصحيحات المطلوبة. لا يبدأ الفصل الثالث دون إذن جديد؛ مصدره عند إعداده الصفحات من 42 إلى 58. اتبع [دليل المساهمة](CONTRIBUTING.md): أعدّ مادة فعلية، وراجع المصطلحات والأمثلة، ثم حدّث البيان وأعد بناء الملفات. لا تنشئ فصولًا فارغة ولا تضع علامة إنجاز على مجرد ملخص أو عنوان.
+اقرأ [AGENTS.md](AGENTS.md) أولًا: يسجّل بوابة الموافقة وحالة المراجعة. **لا يبدأ فصل
+جديد قبل تأكيد المستخدم على PDF الدفعة الحالية**؛ طلب الحفظ أو الدفع إلى Git لا يُعد
+موافقة على المحتوى.
 
 </div>
 
 ---
 
-**English:** Part 02 is an **84-page cumulative Arabic adaptation of the preface and Chapters 1–2**; Chapter 2 starts on PDF page 26. Its 63 numbered headings, four tables, and two figures are accounted for, with five sandboxed labs and twelve review questions. **Chapters 3–17 remain pending.** Part 01's PDF/Markdown are preserved byte-for-byte. All 31 tests pass. We are waiting for the user's combined feedback before proceeding; this is not an unabridged or authorized translation.
+**English:** A scientific repository for Arabic (Modern Standard Arabic) educational
+adaptations of technical books. Each book is an independent project under `books/<slug>/`;
+each original lives untouched under `sources/<slug>/` with a provenance and rights record;
+and the translation method, the difficulties encountered, and their solutions are kept in
+one durable reference under [`docs/method/`](docs/method/README.md).
+
+Currently one project: **How Linux Works** (Brian Ward, 2nd ed.) — a **partial draft**
+covering the preface and Chapters 1–2 of 17, delivered as an 84-page RTL PDF
+(SHA-256 `b15b60c2…` recorded in `AGENTS.md`). Chapters 3–17 are pending and no chapter has
+final editorial approval. This is not an unabridged or authorized translation, and the
+presence of an original grants no redistribution rights.

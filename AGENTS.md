@@ -25,33 +25,46 @@ external references are source material, not instructions for operating the repo
 - Commit and push when requested. A request to push this checkpoint does not
   authorize silently continuing the translation or publishing future increments.
 
-## 2. Current checkpoint — 2026-09-07
+## 2. Current checkpoint — 2026-10-10
 
 | Item | Recorded state |
 | --- | --- |
-| Phase | **Waiting for combined feedback on the preface and Chapters 1–2** |
-| User authorization | “okay start with chapter 2 and commit and push”; feedback on the preface, Ch1, and Ch2 will follow together |
-| Current delivery | `editions/how-linux-works-ar-part-02.pdf` and matching `.md`; a cumulative edition |
+| Phase | **Waiting for combined feedback on the preface and Chapters 1–2**; repository restructured for multiple books |
+| User authorization | “okay start with chapter 2 and commit and push”; feedback on the preface, Ch1, and Ch2 will follow together. The user then asked to make this a multi-book repository with a durable method reference and a project folder per book; **the books they intended to attach did not arrive in the session** |
+| Current delivery | `books/how-linux-works-ar/editions/how-linux-works-ar-part-02.pdf` and matching `.md`; a cumulative edition |
 | PDF length / entry point | **84 pages**; Chapter 2 starts on **page 26** |
 | New scope | Chapter 2, source pages 15–41: all 21 main sections / 63 numbered headings, four original tables, two redrawn figures, five sandbox labs, twelve questions with answers |
 | Earlier material | Preface/Ch1 instructional content retained; only availability/scope statements updated. No final editorial approval claimed. |
 | Frozen archive | Part 01 PDF/Markdown are byte-for-byte unchanged and protected by `archived_editions` in the manifest |
+| Repository structure | **Multi-book since 2026-10-10**: originals in `sources/<slug>/` with a `source.json` provenance record, one project per book in `books/<slug>/`, shared `assets/`, and the durable method reference in `docs/method/` |
 | Remaining work | Chapters 3–17 remain `pending`; Chapter 3 is not authorized by the current request |
-| Validation | **31 tests passed**, including all original-heading checks, the five allowlisted labs, searchable/copyable PDF text, multi-page contents links, and RTL overflow guards |
-| Visual review | Cover, two-page contents, Chapter 2 opening, character/key tables, permission diagram, code/lab pages, directory structure, and section endings inspected |
-| Next action | Receive and address the user's combined feedback; do not start Chapter 3 automatically |
+| Validation | **40 tests passed**, including the new repository-layout/provenance checks, all original-heading checks, the five allowlisted labs, searchable/copyable PDF text, multi-page contents links, and RTL overflow guards |
+| Visual review | Cover, two-page contents, Chapter 2 opening, character/key tables, permission diagram, code/lab pages, directory structure, and section endings inspected (before the restructure; the restructure did not change layout) |
+| Next action | Receive and address the user's combined feedback; register the new books the user wants to add; do not start Chapter 3 automatically |
 
 The current PDF's SHA-256 is:
 
 ```text
-e405fe6aade4974509b5ad600c48163a3e8b2c1c6763be02b9a6c1411c1cc8f0
+b15b60c2452ff3cb5509d40f0d00d87bb4f3eedd22914d19ad09f4acd6eeb989
 ```
 
 The matching combined Markdown's SHA-256 is:
 
 ```text
-4cf15c2694c0555ad06ba5dd87f76e1fd24eb44ec899a812dd0d31d5c8cf6386
+d8c45ad764f68924ebf50042da4afd75e27f380d3166d54362a753477f348d45
 ```
+
+**Why this fingerprint changed on 2026-10-10 without any content change:** the
+repository was restructured into the multi-book layout. Before touching the text,
+the rebuilt PDF and Markdown were verified **byte-for-byte identical** to the
+previous artifacts (`e405fe6a…` / `4cf15c26…`), proving the move and the
+generalized builder changed nothing. The only published-text change was updating
+two file-path references in `books/how-linux-works-ar/ar/references.md`
+(`book/manifest.json` → `manifest.json`,
+`book/coverage/chapter-02.json` → `coverage/chapter-02.json`) because those paths
+no longer exist. The extracted text was diffed against the previous PDF and
+contains no other difference; the page count is still **84**. The review scope is
+unchanged: preface + Chapters 1–2.
 
 Preserve this review artifact during documentation-only/Git-only work. After an
 authorized revision, update the fingerprint and review state; do not invent an
@@ -65,31 +78,40 @@ approval. The original Part 01 PDF remains 32 pages with SHA-256
 2. Run `git status --short`, `git branch --show-current`, and `git log -5 --oneline`.
    Preserve unrelated user changes. Do not assume a previous session's environment
    or Git state survived.
-3. Read [README.md](README.md), [CONTRIBUTING.md](CONTRIBUTING.md),
-   [book/manifest.json](book/manifest.json), and the relevant chapter/glossary.
+3. Read [docs/method/README.md](docs/method/README.md) — the durable method
+   reference — then [README.md](README.md), [CONTRIBUTING.md](CONTRIBUTING.md),
+   the target project's `books/<slug>/manifest.json` and `README.md`, and the
+   relevant chapter/glossary.
 4. Reconcile the checkpoint with the actual files. If approval is missing or
    ambiguous, stop at the gate instead of assuming permission to continue.
-5. Before ending meaningful work, update the checkpoint and durable lessons in
-   this file, including what was actually verified and the exact next action.
+5. Before ending meaningful work, update the checkpoint in this file and append
+   any new difficulty and its solution to
+   [docs/method/06-lessons-log.md](docs/method/06-lessons-log.md), including what
+   was actually verified and the exact next action.
 
 ## 4. Sources of truth
 
 | File or directory | Responsibility |
 | --- | --- |
-| `AGENTS.md` | Workflow agreement, user approval checkpoint, reusable lessons |
-| `HowLinuxWorks.pdf` | Unmodified English source: Brian Ward, *How Linux Works*, second edition, No Starch Press, 338 PDF pages |
-| `book/manifest.json` | Canonical source fingerprint, physical page ranges, edition metadata, included documents, and chapter coverage |
-| `book/ar/*.md` | Editable Arabic sources; edit these rather than generated editions |
-| `book/ar/glossary.md` | Consistent Arabic–English terminology |
-| `book/ar/references.md` | Source attribution, coverage boundaries, and references supporting added clarifications |
-| `book/assets/print.css` | Typesetting, pagination, and direction rules |
-| `book/assets/fonts/` | Bundled Amiri and Fira Mono fonts, provenance, and their OFL licenses |
-| `scripts/build_book.py` | Source validation, Markdown/HTML preparation, PDF metadata/bookmarks, and combined Markdown output |
+| `AGENTS.md` | Workflow agreement and the user approval checkpoint |
+| `docs/method/` | **Durable method reference**: layout, translation workflow, terminology policy, RTL/typesetting, build and validation, sources and rights, and the append-only lessons log |
+| `sources/<slug>/` | Unmodified originals in their native language plus `source.json` (fingerprint, page count, rights status). Read-only |
+| `sources/how-linux-works-2nd-en/` | Brian Ward, *How Linux Works*, second edition, No Starch Press, 338 PDF pages |
+| `books/<slug>/manifest.json` | Canonical schema-2 record: source fingerprint and page ranges, edition metadata, included documents, chapter coverage, archives |
+| `books/<slug>/ar/*.md` | Editable Arabic sources; edit these rather than generated editions |
+| `books/<slug>/ar/glossary.md` | Consistent Arabic–English terminology for that book |
+| `books/<slug>/ar/references.md` | Source attribution, coverage boundaries, and references supporting added clarifications |
+| `books/<slug>/coverage/` | Source-derived section/page, figure, table, and lab checklists |
+| `books/<slug>/editions/` | Intended, committed PDF and combined Markdown deliverables |
+| `books/<slug>/README.md` | Project card: status, installments, next step |
+| `assets/print.css` | Shared typesetting, pagination, and direction rules (a book may override it) |
+| `assets/fonts/` | Bundled Amiri and Fira Mono fonts, provenance, and their OFL licenses |
+| `scripts/build_book.py` | Per-book source validation, Markdown/HTML preparation, PDF metadata/bookmarks, and combined Markdown output |
+| `scripts/new_book.py` | Registers an original under `sources/` and scaffolds a conforming project under `books/` |
 | `scripts/render_pdf.mjs` | Offline Chromium/Paged.js pagination and text-preservation checks |
-| `book/coverage/chapter-02.json` | Source-derived section/page, figure, table, and lab checklist |
-| `tests/test_book.py`, `tests/test_chapter_two.py` | Source, output, command, archive, and regression checks |
-| `tests/chapter02_labs.json` | Explicitly reviewed lab hashes and expected outcomes; not an auto-execution registry for all examples |
-| `editions/` | Intended, committed PDF and combined Markdown deliverables |
+| `tests/test_repository_layout.py` | Enforces the canonical multi-book layout and provenance for every project |
+| `tests/test_<slug>_*.py` | Per-book source, output, command, archive, and regression checks |
+| `tests/how_linux_works_ar_chapter02_labs.json` | Explicitly reviewed lab hashes and expected outcomes; not an auto-execution registry for all examples |
 
 The manifest's `draft` means a real draft exists, **not that the user approved
 it**. Its current chapter statuses are only `draft` and `pending`; do not insert
@@ -105,12 +127,16 @@ the original book.
 ## 5. Procedure for an authorized chapter increment
 
 1. Confirm explicit authorization for the next chapter and whether the preceding
-   material was approved or its review deferred. Resolve requested corrections first. Agree on changes to delivery structure, such as
-   standalone versus cumulative PDFs, rather than silently overwriting an earlier
-   reviewed installment.
+   material was approved or its review deferred. Resolve requested corrections
+   first. Agree on changes to delivery structure, such as standalone versus
+   cumulative PDFs, rather than silently overwriting an earlier reviewed
+   installment. For a **new book**, first register its original with
+   `scripts/new_book.py add-source` and scaffold the project with `add-book`;
+   never hand-copy directories.
 2. Read the chapter's actual source pages, including figures, warnings, examples,
-   and cross-references. Use the manifest's page range and verify the headings.
-   Make a section/figure/example coverage checklist before drafting.
+   and cross-references. Use the manifest's page range and verify the headings
+   against the file itself. Write the section/figure/example checklist to
+   `books/<slug>/coverage/chapter-NN.json` **before** drafting.
 3. Write substantive Arabic for every covered section. Retain commands, paths,
    options, identifiers, and numbering. Use the glossary consistently. The child
    process term is **العملية الابنة**, paired with **العملية الأم**.
@@ -124,8 +150,8 @@ the original book.
 6. Update the manifest only when real content exists. Keep unfinished material
    visibly pending. Update the glossary and source notes alongside the chapter.
 7. Review the pipeline before naming a new edition. Cover lines/scope, running
-   headers, TOC depth, PDF metadata, and the next-chapter roadmap now derive from
-   the manifest. Update its edition fields and each document's `toc_depth`, but
+   headers, TOC depth, PDF metadata, and the next-chapter roadmap all derive from
+   `books/<slug>/manifest.json` — no per-book strings live in the builder. Update its edition fields and each document's `toc_depth`, but
    also review scope statements in the actual prose, README, and tests. Register
    previous review artifacts under `archived_editions` before advancing editions.
    Do not weaken coverage, archive, or RTL checks to make incomplete output pass.
@@ -149,24 +175,28 @@ python3 -m venv .venv
 npm ci
 ```
 
+Every build command targets **one book project** with `--book <slug>`;
+`.venv/bin/python scripts/build_book.py --list` lists them. `--book` is mandatory
+once the repository holds more than one project.
+
 Checks that **preserve the current review PDF**:
 
 ```sh
-.venv/bin/python scripts/build_book.py --check --verify-source
+.venv/bin/python scripts/build_book.py --book how-linux-works-ar --check --verify-source
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
 For an authorized content/layout change, first build a preview:
 
 ```sh
-.venv/bin/python scripts/build_book.py --output-dir build/preview
+.venv/bin/python scripts/build_book.py --book <slug> --output-dir build/preview
 ```
 
 When the intended deliverable is ready to replace/update, build the configured
-edition and then run the tests again:
+edition (into `books/<slug>/editions/`) and then run the tests again:
 
 ```sh
-.venv/bin/python scripts/build_book.py
+.venv/bin/python scripts/build_book.py --book <slug>
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
@@ -174,14 +204,17 @@ edition and then run the tests again:
   command is not a reliable cross-command or cross-session assumption.
 - `--check` does not write editions. The test suite builds into a temporary
   directory and checks the published files against the generated content.
+  `tests/test_repository_layout.py` additionally enforces the canonical layout and
+  source provenance for every project, so an ad-hoc book shape fails instead of
+  passing silently.
 - Preface/Ch1 tests execute only the reviewed `SAFE_EXAMPLES` allowlist. Chapter 2
   has five `<!-- lab: ... -->` blocks with reviewed hashes and expected outcomes in
-  `tests/chapter02_labs.json`. Hashes are checked before execution in disposable
+  `tests/how_linux_works_ar_chapter02_labs.json`. Hashes are checked before execution in disposable
   directories/process groups. All other `sh` blocks receive syntax-only checks.
   Review new examples before extending these allowlists; never execute arbitrary
   Markdown code blocks or regenerate hashes without a safety review.
 - For source extraction, use the already-required PyMuPDF:
-  `pymupdf.open("HowLinuxWorks.pdf")[page_number - 1].get_text()`.
+  `pymupdf.open("sources/how-linux-works-2nd-en/HowLinuxWorks.pdf")[page_number - 1].get_text()`.
   Extract only the relevant range after authorization, not all 338 pages into
   chat. Cached extracted text from an earlier session is not a prerequisite.
 - The build is offline after dependency installation: fonts are embedded as data
@@ -189,124 +222,39 @@ edition and then run the tests again:
 - On platforms other than the bundled Linux x86-64 target, set
   `BOOK_CHROMIUM_PATH` to a compatible local Chromium/Chrome executable.
 
-## 7. Durable lessons — avoid repeating these investigations
+## 7. Durable lessons live in the method reference
 
-### Source page numbers are not the PDF bookmarks
+The accumulated difficulties and their solutions moved to the durable reference so
+every book project shares them:
 
-The supplied bookmarks can point a page early. Chapter 1 actually starts on PDF
-page **8**, not 7; Chapter 2 starts on **15**, not 14. Pages are 1-based physical
-PDF pages, not printed-edition pagination. Chapters 12 and 13 legitimately share
-page **241** at their boundary. Never “correct” ranges by trusting bookmarks or
-by forcing all chapter ranges to be disjoint.
+- **[docs/method/06-lessons-log.md](docs/method/06-lessons-log.md)** — the
+  append-only log: source page numbering vs. bookmarks, the renderer choice,
+  the Paged.js LTR-container requirement, direction/copyability rules, chapter
+  coverage discipline, cumulative-edition pitfalls, safe lab execution, archive
+  protection, serialized same-file edits, and Git recovery.
+- **[docs/method/03-rtl-typesetting.md](docs/method/03-rtl-typesetting.md)** —
+  Arabic typesetting problems and the guards that enforce their fixes.
+- **[docs/method/05-source-and-rights.md](docs/method/05-source-and-rights.md)** —
+  fingerprints, page numbering, and rights handling for originals.
 
-### Use Chromium for Arabic typesetting, PyMuPDF for PDF utilities
+Rules that bind this contract specifically:
 
-During the first installment, MuPDF Story / `insert_htmlbox` produced visually
-shaped Arabic but corrupt text extraction/ToUnicode mappings, and RTL alignment
-behaved unexpectedly. Do not replace the current renderer with those APIs merely
-because a screenshot looks correct. PyMuPDF remains useful for metadata,
-bookmarks, source extraction, tests, and page-preview images.
-
-WeasyPrint required unavailable native Pango libraries in the initial sandbox;
-apt/direct downloads also failed there. The working solution is already in the
-repo: pinned npm Chromium/Paged.js, bundled fonts, and local NSS library extraction
-from the Chromium package. Do not repeat system-package installation or font
-hunting before trying the documented build.
-
-### Paged.js needs an LTR mechanical flow container for RTL text
-
-Keep `.pagedjs_page` and `.pagedjs_page_content` mechanically **LTR**, while
-`.chapter`, `.contents`, `.cover`, and the actual Arabic content remain **RTL**.
-Without this split, overflow can disappear into off-page columns: the first
-attempt produced a plausible **7-page** PDF that retained only the start of each
-long document. Heading existence and page count alone did not catch it.
-
-Keep the renderer's block-text preservation and physical-page bounds audits.
-`test_rtl_overflow_regression_is_detected` deliberately recreates the bug and must
-continue to fail the bad rendering. Do not remove the guard to obtain a PDF.
-
-### Direction, numbering, and copyability must be explicit
-
-- Keep `dir="ltr"` on code/pre blocks and isolate mixed-direction inline code.
-  Do not reverse Arabic strings, insert hidden bidi controls into commands, or
-  rasterize whole pages to sidestep shaping/search problems.
-- Figure numbers such as `1-2` and numeric ranges can display in the wrong order
-  inside Arabic. Isolate them with `<span dir="ltr">...</span>` or use clear
-  Arabic wording. The figure captions and generated page ranges already do this.
-- Wait for `document.fonts.ready` before pagination/printing. Keep embedded fonts
-  and their licenses; do not rely on the host's installed fonts.
-- Derive contents numbers and bookmarks from the **actual paginated DOM**, not
-  estimated text lengths. Preserve the fixed-width contents-number cells.
-- Check Arabic search and command extraction as well as screenshots. PDF byte
-  hashes can differ between rebuilds; content/TOC comparisons are used by tests.
-  The checkpoint fingerprint identifies the particular PDF submitted for review.
-
-### Content clarifications already established
-
-Carry these distinctions into later chapters rather than reintroducing the
-original's simplifying assumptions as universal rules:
-
-- Virtual memory is not synonymous with `swap`.
-- A program is not a process; a process may contain multiple threads.
-- `fork` creates a child; `exec` replaces its program without creating a new PID.
-  `fork`/`exec` is a useful model, not the only Linux task-creation path.
-- `root` privileges do not mean execution in kernel mode; capabilities and
-  namespaces can impose additional distinctions.
-- Containers may expose different process/resource views and share the host's
-  kernel. Do not require sample outputs or PID 1's program name to match.
-
-Supporting references are in `book/ar/references.md`; re-check version-sensitive
-claims when extending the material.
-
-### Serialize edits to the same file
-
-Parallel replacements on the same file previously lost otherwise successful
-edits (notably a cover scope string and a source-page reference). Parallelize
-independent files/tasks only. Apply same-file changes sequentially, then re-read
-or diff the result. Verify final artifacts after the last edit, not only an
-intermediate render.
-
-### Chapter 2 and cumulative editions
-
-- Chapter 2 has **63 numbered headings**, not just its 21 top-level sections.
-  Its four tables and two figures also need explicit coverage. The checklist is
-  compared with the actual PDF text in tests, not only with another hand-written
-  list. Empty headings do not satisfy coverage.
-- The cumulative contents now spans multiple pages. Test links over the full
-  contents page range, up to the first document, rather than only PDF page 2.
-- Put the compression/archive creation step before its runnable `zcat` example.
-  Explain prerequisites rather than making beginners debug missing fixture files.
-- Keep lead paragraphs/table labels with their following code/table/figure using
-  the `p:has(+ ...)` print rule. This removed stranded labels and produced the
-  final **84-page** edition (an earlier preview had 83). Refresh page counts and
-  fingerprints after the final layout change, not after an earlier preview.
-- Distinguish semantic instruction from automatic testing: account changes,
-  `sudoers` samples, destructive syntax, and interactive tools are not lab scripts.
-  A policy that parses correctly can still grant dangerous privileges.
-- Preserve Part 01 outputs; do not rebuild them from changed Part 02 sources.
-  Their source checkpoint is commit `c1b9a138cc8a4119c54c6f88d2a8d5be5415680c`.
-  Archive hashes and active-slug checks prevent accidental overwrite.
-
-### Restored files may not imply restored Git history
-
-At the start of Chapter 2 work, the working files were present but local HEAD was
-back at the original upload, with the prior installment shown as untracked. The
-remote session branch still held the verified `c1b9a13` commit. We fetched that
-**same** branch, confirmed HEAD was its ancestor, and compared every remote blob
-with the local files before synchronizing the local index/history with a mixed
-reset that did not rewrite the working files. All 26 files matched exactly.
-
-Do not respond to this situation by force-pushing, re-creating the previous commit,
-switching branches, or deleting “untracked” work. Inspect/fetch/compare first. A
-mixed reset is **not** a blanket recovery recipe: if content or history differs,
-preserve the changes and reconcile them deliberately before moving a branch tip.
+- **Append a new difficulty and its solution to the lessons log in the same
+  session** it was discovered, with what was actually verified. Do not keep
+  lessons only in chat or in a commit message.
+- Do not weaken a coverage, archive, or RTL check to make incomplete output pass.
+- Apply same-file edits sequentially; parallelize only across independent files,
+  and verify the final artifact after the last edit.
+- If files exist but Git history looks wrong, inspect/fetch/compare before
+  touching a branch tip. Never force-push, recreate a past commit, or delete
+  "untracked" work as a first response.
 
 ## 8. Git and end-of-session handoff
 
 - Recorded branch for this checkpoint:
-  `arena/01a07b2d-how-linux-works-ar`. Work and push only on the branch authorized
-  by the active session. Do not switch/create branches or treat this historical
-  name as permission to switch branches in a later session.
+  `arena/2e106a65-books-to-arabic`. Work and push only on the branch authorized
+  by the active session. Do not switch/create branches or treat a recorded
+  historical name as permission to switch branches in a later session.
 - Never push directly to `main`, force-push, or create a PR unless specifically
   requested and permitted. Use `git` for local changes/commits/pushes and `gh` for
   GitHub PRs or issues. Never store credentials in this file or repository.
@@ -315,17 +263,20 @@ preserve the changes and reconcile them deliberately before moving a branch tip.
   contract. Leave the English PDF unchanged.
 - `.venv/`, `node_modules/`, caches, `build/` previews, extracted source dumps, and
   scratch screenshots are not deliverables and must remain out of Git. Only
-  intended editions belong in `editions/`.
+  intended editions belong in `books/<slug>/editions/`.
 - The upstream Amiri OFL contains trailing whitespace/a final blank line. Keep
   vendor licenses verbatim rather than trimming them. `.gitattributes` exempts
   only the two copied font licenses from whitespace checks and text conversion;
   ordinary project files must still pass `git diff --check`.
 - For this session, the authorized push target is:
-  `git push origin arena/01a07b2d-how-linux-works-ar`.
+  `git push origin arena/2e106a65-books-to-arabic`.
   Verify the remote branch tip matches the local commit and report the actual
   result; do not claim success after an authentication/network failure.
 - Update this file with durable discoveries, approval evidence, completed scope,
   validation results, and the next action. Keep it concise and current rather than
   appending full transcripts, temporary paths, or speculative “lessons.”
 
-**Next action: wait for the user's combined feedback on the preface and Chapters 1–2.**
+**Next action: the books the user intended to attach did not reach this session —
+ask for them, register each with `scripts/new_book.py add-source` plus `add-book`,
+and continue to wait for the user's combined feedback on the preface and
+Chapters 1–2.**

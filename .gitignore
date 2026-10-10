@@ -8,4 +8,4 @@ __pycache__/
 .ruff_cache/
 build/
 .DS_Store
-# The requested PDF and combined Markdown in editions/ are intentional deliverables.
+# The PDF and combined Markdown in books/<slug>/editions/ are intentional deliverables.

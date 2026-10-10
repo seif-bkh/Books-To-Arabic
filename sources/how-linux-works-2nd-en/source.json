@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "slug": "how-linux-works-2nd-en",
+  "title": "How Linux Works: What Every Superuser Should Know",
+  "title_ar": "كيف يعمل لينكس: ما يجب أن يعرفه كل مستخدم متميز",
+  "author": "Brian Ward",
+  "author_ar": "برايان وارد",
+  "publisher": "No Starch Press",
+  "edition": 2,
+  "year": 2015,
+  "language": "en",
+  "file": "HowLinuxWorks.pdf",
+  "format": "pdf",
+  "pages": 338,
+  "sha256": "de56a39307fe5d8d9b5283d884ee8418241b283556fbf5ae9b13dc2360d065fa",
+  "page_numbering": "1-based physical PDF pages, verified against heading positions in the text, not the embedded PDF bookmarks. Chapter 12 ends and chapter 13 begins on page 241.",
+  "rights": {
+    "status": "all-rights-reserved",
+    "statement": "Copyright Brian Ward / No Starch Press. Presence in this repository grants no translation, republication, or distribution rights.",
+    "notes": "The rights page (PDF page 337) states second edition, copyright 2015; the file also contains 2014 publication data. This is not a newer English edition."
+  },
+  "used_by": [
+    "books/how-linux-works-ar"
+  ]
+}

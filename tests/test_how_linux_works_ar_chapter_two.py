@@ -21,20 +21,24 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from scripts import build_book as book  # noqa: E402
 
+SLUG = "how-linux-works-ar"
+PROJECT = book.Project.resolve(SLUG)
+
 LAB_PATTERN = re.compile(r"<!-- lab: ([a-z0-9-]+) -->\n```sh\n(.*?)\n```", re.S)
 
 
 class ChapterTwoSourceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data = book.load_manifest()
+        cls.data = book.load_manifest(PROJECT)
         cls.spec = next(d for d in cls.data["documents"] if d["id"] == "chapter-2")
-        cls.text = (ROOT / cls.spec["file"]).read_text(encoding="utf-8")
-        cls.coverage = json.loads((ROOT / cls.spec["coverage_file"]).read_text())
+        cls.text = (PROJECT.dir / cls.spec["file"]).read_text(encoding="utf-8")
+        cls.coverage = json.loads((PROJECT.dir / cls.spec["coverage_file"]).read_text())
+        cls.source_pdf = ROOT / cls.data["source"]["dir"] / cls.data["source"]["file"]
 
     def test_coverage_matches_all_original_numbered_headings(self):
         found = []
-        with pymupdf.open(ROOT / "HowLinuxWorks.pdf") as source:
+        with pymupdf.open(self.source_pdf) as source:
             for number in range(15, 42):
                 for line in source[number - 1].get_text().splitlines():
                     match = re.match(r"^(2(?:\.\d+)+)\s+(.+)$", line)
@@ -46,18 +50,18 @@ class ChapterTwoSourceTests(unittest.TestCase):
         self.assertEqual(len(found), 63)
         self.assertEqual([s[0] for s in found if s[0].count(".") == 1],
                          [f"2.{n}" for n in range(1, 22)])
-        book.validate_coverage(self.spec, self.text, ROOT)
+        book.validate_coverage(self.spec, self.text, PROJECT)
 
     def test_missing_section_is_rejected(self):
         text = self.text.replace("### 2.14.1 الإخراج القياسي للأخطاء", "### الإخراج القياسي للأخطاء")
         with self.assertRaisesRegex(ValueError, "Missing, reordered"):
-            book.validate_coverage(self.spec, text, ROOT)
+            book.validate_coverage(self.spec, text, PROJECT)
 
     def test_heading_without_explanation_is_rejected(self):
         text = re.sub(r"(^### 2\.4\.2 [^\n]+\n).*?(?=^### )", r"\1\n", self.text,
                       count=1, flags=re.M | re.S)
         with self.assertRaisesRegex(ValueError, "substantive Arabic"):
-            book.validate_coverage(self.spec, text, ROOT)
+            book.validate_coverage(self.spec, text, PROJECT)
 
     def test_original_tables_figures_and_labs_are_accounted_for(self):
         self.assertEqual(self.coverage["figures"], ["2-1", "2-2"])
@@ -71,7 +75,7 @@ class ChapterTwoSourceTests(unittest.TestCase):
             self.assertIn(label, self.text)
 
     def test_archived_part_one_is_unchanged(self):
-        book.verify_archives(self.data)
+        book.verify_archives(self.data, PROJECT)
         self.assertEqual(len(self.data["archived_editions"]), 1)
         self.assertEqual(self.data["archived_editions"][0]["pdf_pages"], 32)
         self.assertEqual(self.data["archived_editions"][0]["files"][0]["sha256"],
@@ -83,24 +87,23 @@ class ChapterTwoSourceTests(unittest.TestCase):
             root = Path(directory)
             (root / "old.pdf").write_bytes(b"changed")
             with self.assertRaisesRegex(ValueError, "Archived review artifact was changed"):
-                book.verify_archives(data, root)
+                book.verify_archives(data, book.Project(slug=SLUG, dir=root, root=ROOT))
 
     def test_active_slug_cannot_overwrite_an_archive(self):
         data = copy.deepcopy(self.data)
         data["edition"]["slug"] = data["archived_editions"][0]["slug"]
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / "book").mkdir()
-            (root / "book/manifest.json").write_text(json.dumps(data))
+            (root / "manifest.json").write_text(json.dumps(data))
             with self.assertRaisesRegex(ValueError, "cannot overwrite"):
-                book.load_manifest(root)
+                book.load_manifest(book.Project(slug=SLUG, dir=root, root=ROOT))
 
     def test_edition_label_and_scope_are_not_hardcoded_to_part_one(self):
         data = copy.deepcopy(self.data)
         data["edition"]["label"] = "دفعة اختبار"
-        docs = book.prepare_documents(data)
+        docs = book.prepare_documents(data, PROJECT)
         html = book.compose_html(data, docs)
-        styled = book.inline_styles(html, data)
+        styled = book.inline_styles(html, data, PROJECT)
         self.assertIn("دفعة اختبار", book.cover_html(data))
         self.assertIn("<title>كيف يعمل لينكس — دفعة اختبار</title>", html)
         self.assertIn("إعداد عربي تعليمي · دفعة اختبار", styled)
@@ -129,9 +132,10 @@ class ChapterTwoSourceTests(unittest.TestCase):
 class ChapterTwoLabTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        text = (ROOT / "book/ar/02-basic-commands.md").read_text()
+        text = (PROJECT.dir / "ar/02-basic-commands.md").read_text()
         cls.blocks = dict(LAB_PATTERN.findall(text))
-        cls.allowlist = json.loads((ROOT / "tests/chapter02_labs.json").read_text())["labs"]
+        cls.allowlist = json.loads(
+            (ROOT / "tests/how_linux_works_ar_chapter02_labs.json").read_text())["labs"]
 
     def test_only_five_reviewed_labs_are_allowlisted(self):
         self.assertEqual(set(self.blocks), set(self.allowlist))
